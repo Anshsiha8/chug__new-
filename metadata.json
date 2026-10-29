@@ -1,0 +1,6 @@
+{
+  "name": "CHUG! Neo-Pop Hydration",
+  "description": "A high-octane Neo-Pop Comic Brutalism hydration tracking experience with smart reminders, superhero pace tracking, and visual gamification.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

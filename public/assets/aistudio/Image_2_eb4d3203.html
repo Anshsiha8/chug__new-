@@ -1,0 +1,582 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_tab" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"on-tertiary-fixed-variant": "#004f54", "secondary-fixed-dim": "#e2c633", "on-tertiary-container": "#a7f7ff", "secondary-fixed": "#ffe256", "outline-variant": "#434656", "surface-container": "#201f1f", error: "#ffb4ab", "on-surface-variant": "#c4c5d9", "on-error-container": "#ffdad6", outline: "#8e90a2", "primary-fixed": "#dde1ff", "inverse-on-surface": "#313030", "on-secondary": "#393000", "on-secondary-fixed-variant": "#534600", "surface-tint": "#b9c3ff", "on-secondary-fixed": "#211b00", "inverse-surface": "#e5e2e1", "on-error": "#690005", "surface-container-high": "#2a2a2a", "on-tertiary-fixed": "#002022", "error-container": "#93000a", "on-primary": "#002388", "on-background": "#e5e2e1", "on-tertiary": "#00363a", "surface-variant": "#353534", secondary: "#e2c633", "tertiary-fixed": "#7cf4ff", surface: "#131313", "tertiary-fixed-dim": "#29dbe7", "on-primary-fixed-variant": "#0034bf", "on-primary-container": "#e6e8ff", "on-surface": "#e5e2e1", "tertiary-container": "#00757d", "primary-container": "#2455ff", "surface-bright": "#393939", "surface-container-lowest": "#0e0e0e", "primary-fixed-dim": "#b9c3ff", "on-secondary-container": "#433900", "surface-container-low": "#1c1b1b", "secondary-container": "#bca200", primary: "#b9c3ff", "surface-dim": "#131313", tertiary: "#29dbe7", "on-primary-fixed": "#001356", background: "#131313", "inverse-primary": "#0a48f4", "surface-container-highest": "#353534"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {"space-xs": "0.25rem", "space-lg": "1.5rem", margin: "1rem", gutter: "1rem", "gutter-tablet": "1.5rem", "gutter-desktop": "2rem", "margin-tablet": "2rem", "margin-desktop": "3rem", "space-md": "1rem", "space-sm": "0.5rem", "space-xl": "2.5rem"}, fontFamily: {"display-hero-mobile": ["Anton"], "body-lg": ["Space Grotesk"], "label-lg": ["Space Grotesk"], "headline-lg": ["Anton"], "headline-sm": ["Anton"], "title-lg": ["Space Grotesk"], "title-md": ["Space Grotesk"], "display-hero": ["Anton"], "label-md": ["Space Grotesk"], "headline-lg-mobile": ["Anton"], "label-sm": ["Space Grotesk"], "headline-md": ["Anton"], "body-md": ["Space Grotesk"], headline: ["Anton"], display: ["Anton"], body: ["Space Grotesk"], label: ["Space Grotesk"]}, fontSize: {"display-hero-mobile": ["44px", {lineHeight: "48px", letterSpacing: "0.02em", fontWeight: "400"}], "body-lg": ["16px", {lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "500"}], "label-lg": ["14px", {lineHeight: "18px", letterSpacing: "0.05em", fontWeight: "700"}], "headline-lg": ["36px", {lineHeight: "40px", letterSpacing: "0.03em", fontWeight: "400"}], "headline-sm": ["20px", {lineHeight: "24px", letterSpacing: "0.04em", fontWeight: "400"}], "title-lg": ["18px", {lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "700"}], "title-md": ["16px", {lineHeight: "22px", letterSpacing: "0em", fontWeight: "700"}], "display-hero": ["64px", {lineHeight: "68px", letterSpacing: "0.02em", fontWeight: "400"}], "label-md": ["12px", {lineHeight: "16px", letterSpacing: "0.06em", fontWeight: "700"}], "headline-lg-mobile": ["28px", {lineHeight: "32px", letterSpacing: "0.03em", fontWeight: "400"}], "label-sm": ["10px", {lineHeight: "14px", letterSpacing: "0.08em", fontWeight: "700"}], "headline-md": ["24px", {lineHeight: "28px", letterSpacing: "0.03em", fontWeight: "400"}], "body-md": ["14px", {lineHeight: "20px", letterSpacing: "0em", fontWeight: "500"}]}}}};</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}.comic-shadow-sm{box-shadow:2px 2px 0px #171717;}.comic-shadow-md{box-shadow:4px 4px 0px #171717;}.comic-border{border:3px solid #171717;}.comic-border-2{border:2px solid #171717;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen selection:bg-secondary-container"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/90 backdrop-blur-xl"><div class="h-20 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-xs"><img alt="CHUG! Logo" class="w-10 h-10 object-contain rounded-lg border-2 border-black shadow-[2px_2px_0px_#171717] bg-white p-0.5" src="https://lh3.googleusercontent.com/aida/AEtjO1WdXx0gNN27FFqh1_U284EkOV7xkWOSTuPKrjLIIySA3_uziKHcFxts38qKpWxypR3FFrj31cyewc0171JqggQw5sJxerpazIGARSOFmbL_4YL8MOkMdTO3UDkPWzQCZP2BoMnWXJlONwXSSmbvoZLReN-yvFH4wATZ_ANJ5v_PEmbYVVkygZIs-agrFpX1DFellyo9-qex8yrx3wbWFbP5bSP3kRo_rhg1avzIVI2MCILd9RE-heLZ6K53"><div class="flex flex-col justify-center gap-1"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm uppercase text-on-surface tracking-wide leading-none">CHUG!</span><span class="comic-border-2 comic-shadow-sm bg-secondary-container text-on-surface font-label-sm text-[10px] px-1 py-0.5 rounded-DEFAULT uppercase rotate-[-2deg] leading-none inline-flex items-center">MODE: ON</span></div><span class="font-label-sm text-[10px] uppercase text-primary tracking-wider leading-none font-bold block">Hydration History</span></div></div><div class="flex items-center"><div class="w-10 h-10 comic-border-2 rounded-full overflow-hidden comic-shadow-sm bg-surface-container"><img alt="Profile" class="w-8 h-8 rounded-full object-cover w-full h-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-ua20YpWxt4HgkugZCskywBEdRyqErMEirHxAdwGToPk5hSsDvoT6s8L_jaxQ1aGed7vRHm6bv5oUlvinXEl-pE0XpYafAJTJh7xjrDNNlgfYn1LVSTA4WqomIUkaerDHBKuI07CS7Bi7jBWTy2YP9nhfTtYYvVYXF8vzC_1JAQ3q_JHtahqBQmWH7UAnhsw5XpSUFnGsLWJJPLCyE68s9ZcJpORZax1-qLjes89C7956L3x8U1bxcw"></div></div></div></header><main class="flex flex-col relative w-full pt-20 pb-28 px-margin bg-surface flex-grow"><div class="flex flex-col w-full gap-space-md">
+<!-- POP ART BEN DAY DOT BACKGROUND SIMULATION & RETRO PANEL INTRO -->
+<div class="relative w-full bg-surface-container-lowest comic-border comic-shadow-md rounded-xl p-space-md overflow-hidden">
+<!-- Retro Comic Corner Sticker -->
+<div class="absolute top-2 right-2 bg-secondary-container text-on-surface comic-border-2 font-label-sm text-[10px] px-2 py-0.5 rounded shadow-sm rotate-[3deg] z-10 uppercase tracking-wider font-bold" id="issue-badge">✨ IN MY HYDRATED ERA • ISSUE #322</div>
+<!-- CALENDAR MONTH SWITCHER (Clean single header) -->
+<div class="flex items-center justify-between gap-space-xs mb-space-sm mt-5">
+<button aria-label="Previous Month" class="w-10 h-10 flex items-center justify-center comic-border-2 comic-shadow-sm bg-surface-container hover:bg-secondary-container text-on-surface rounded-lg transition-transform active:translate-x-0.5 active:translate-y-0.5" id="prev-month-btn" type="button">
+<span class="material-symbols-outlined font-bold text-[22px]">arrow_back_ios_new</span>
+</button>
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">TIMELINE LOG • GOAL SLAYED. SEE YOU TOMORROW, BESTIE.</span>
+<h2 class="font-headline-sm text-headline-sm uppercase tracking-wider text-on-surface flex items-center gap-1.5" id="current-month-label">
+          OCTOBER 2026
+        </h2>
+</div>
+<button aria-label="Next Month" class="w-10 h-10 flex items-center justify-center comic-border-2 comic-shadow-sm bg-surface-container hover:bg-secondary-container text-on-surface rounded-lg transition-transform active:translate-x-0.5 active:translate-y-0.5" id="next-month-btn" type="button">
+<span class="material-symbols-outlined font-bold text-[22px]">arrow_forward_ios</span>
+</button>
+</div>
+<!-- DAYS OF WEEK BAR -->
+<div class="grid grid-cols-7 gap-1 bg-secondary-container comic-border-2 rounded-lg p-1 mb-2 text-center">
+<span class="font-label-md text-label-md text-on-surface py-0.5">M</span>
+<span class="font-label-md text-label-md text-on-surface py-0.5">T</span>
+<span class="font-label-md text-label-md text-on-surface py-0.5">W</span>
+<span class="font-label-md text-label-md text-on-surface py-0.5">T</span>
+<span class="font-label-md text-label-md text-on-surface py-0.5">F</span>
+<span class="font-label-md text-label-md text-on-surface py-0.5">S</span>
+<span class="font-label-md text-label-md text-on-surface py-0.5">S</span>
+</div>
+<!-- STAMP PANEL CALENDAR GRID (Dynamically populated) -->
+<div class="grid grid-cols-7 gap-1 text-center select-none" id="history-calendar-grid">
+<!-- Populated by JS -->
+</div>
+</div>
+<!-- POP ART SELECTED DAY BANNER -->
+<div class="relative w-full bg-primary-container text-on-primary comic-border comic-shadow-md rounded-xl p-space-md overflow-hidden">
+<!-- Starburst burst icon & decorative comic lines -->
+<div class="absolute -right-6 -bottom-6 opacity-20 pointer-events-none">
+<svg fill="currentColor" height="150" viewBox="0 0 100 100" width="150">
+<polygon points="50,0 63,35 98,35 70,57 81,91 50,70 19,91 30,57 2,35 37,35"></polygon>
+</svg>
+</div>
+<!-- Comic Ribbon Tag -->
+<div class="flex items-center mb-space-md">
+<div class="inline-flex items-center gap-1.5 bg-surface-container-lowest text-on-surface comic-border-2 comic-shadow-sm px-2.5 py-1 rounded font-label-md text-label-md uppercase rotate-[-1.5deg]">
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">event</span>
+<span class="font-bold text-[12px] tracking-wide" id="selected-day-label">SATURDAY, OCT 24, 2026</span>
+</div>
+</div>
+<!-- Hero Intakes & Punchy Celebration -->
+<div class="flex items-start justify-between gap-space-sm">
+<div>
+<span class="font-label-sm text-label-sm text-on-primary-container font-bold uppercase tracking-wider block">TOTAL INGESTED</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-headline-lg-mobile text-headline-lg-mobile tracking-tight" id="selected-total-ml">2,850</span>
+<span class="font-title-md text-title-md opacity-80" id="selected-goal-ml">/ 2,500 ML</span>
+</div>
+</div>
+<!-- Action Comic Burst Callout Badge -->
+<div class="comic-border-2 comic-shadow-sm bg-secondary-container text-on-surface px-space-xs py-1 rounded rotate-[3deg] text-center flex flex-col items-center flex-shrink-0" id="status-callout-badge"><span class="font-headline-sm text-headline-sm leading-none text-primary" id="status-callout-title">NO CRUMBS!</span><span class="font-label-sm text-[9px] uppercase font-bold tracking-tighter leading-none mt-0.5" id="status-callout-subtitle">YOU ATE THAT BOTTLE &amp; LEFT ZERO CRUMBS!</span></div>
+</div>
+<!-- Progress Meter with Pop-Art Segment Lines -->
+<div class="w-full bg-on-primary/20 comic-border-2 rounded-full h-4 mt-space-sm overflow-hidden p-0.5 flex">
+<div class="bg-secondary-container h-full rounded-full transition-all duration-500" id="selected-progress-bar" style="width: 100%;"></div>
+</div>
+<!-- Day Overview Quick Badges -->
+<div class="flex items-center justify-between gap-1 bg-surface-container-lowest/15 comic-border-2 rounded px-2 py-1 mt-space-sm text-[11px] font-label-sm font-bold tracking-wide uppercase"><span class="flex items-center gap-1">✨ NO CAP, YOUR SKIN WILL THANK YOU</span><span class="bg-secondary-container text-on-surface px-1 py-0.5 rounded text-[9px] font-bold">LEVEL UP YOUR DRIP: 2L+ REACHED 💧</span></div><div class="grid grid-cols-3 gap-space-xs mt-space-md pt-space-xs border-t border-on-primary/20 text-center font-label-sm text-label-sm text-on-primary">
+<div class="bg-surface-container-lowest/10 rounded comic-border-2 p-1">
+<span class="block opacity-75 text-[10px]">DRINKS</span>
+<span class="font-title-md text-title-md" id="summary-drink-count">7 LOGS</span>
+</div>
+<div class="bg-surface-container-lowest/10 rounded comic-border-2 p-1">
+<span class="block opacity-75 text-[10px]">FIRST SIP</span>
+<span class="font-title-md text-title-md" id="summary-first-sip">07:45 AM</span>
+</div>
+<div class="bg-surface-container-lowest/10 rounded comic-border-2 p-1">
+<span class="block opacity-75 text-[10px]">LAST SIP</span>
+<span class="font-title-md text-title-md" id="summary-last-sip">09:30 PM</span>
+</div>
+</div>
+</div>
+<!-- DETAILED INTAKE ACTIVITY TIMELINE -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between px-1 mb-0.5">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="material-symbols-outlined text-primary text-[20px] flex-shrink-0">receipt_long</span>
+<h3 class="font-headline-sm text-headline-sm uppercase text-on-surface tracking-wide truncate">ACTIVITY LOGS</h3>
+</div>
+<span class="font-label-sm text-[10px] uppercase bg-secondary-container text-on-surface px-2 py-0.5 rounded font-bold comic-border-2 flex-shrink-0 tracking-wider whitespace-nowrap rotate-[-1.5deg]">⚡ VALID SIP LOGGED</span><span class="font-label-sm text-label-sm uppercase bg-surface-container text-on-surface-variant px-2.5 py-1 rounded font-bold comic-border-2 flex-shrink-0 tracking-wider whitespace-nowrap">CHRONO VIEW</span>
+</div>
+<!-- LOG ENTRIES CONTAINER (Populated dynamically) -->
+<div class="flex flex-col gap-space-sm" id="activity-logs-container">
+<!-- Rendered dynamic entries -->
+</div>
+</div>
+<!-- STICKY RETRO ACTION BUTTON -->
+<div class="sticky bottom-2 w-full pt-space-xs z-30">
+<button class="w-full h-14 bg-secondary-container hover:bg-secondary-fixed text-on-surface comic-border comic-shadow-md rounded-xl font-headline-sm text-headline-sm uppercase tracking-wide flex items-center justify-center gap-2 transition-transform active:translate-x-1 active:translate-y-1" id="log-past-drink-btn" type="button">
+<span class="material-symbols-outlined text-[28px] font-bold">add_circle</span>
+      + LOG PAST DRINK
+    </button>
+</div>
+</div>
+<!-- RETRO COMIC MODAL: LOG PAST DRINK -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs hidden" id="log-modal">
+<div class="w-full max-w-sm bg-surface-container-lowest comic-border comic-shadow-md rounded-xl p-space-md flex flex-col gap-4 relative">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl font-bold">local_drink</span>
+<h3 class="font-headline-sm text-headline-sm uppercase tracking-wide">QUICK LOG DRINK</h3>
+</div>
+<button class="w-8 h-8 rounded comic-border-2 bg-surface-container hover:bg-error hover:text-white flex items-center justify-center font-bold" id="modal-close-btn">
+        ✕
+      </button>
+</div><div class="bg-secondary-container/90 comic-border-2 rounded-lg p-2 text-center text-on-surface flex items-center justify-center gap-1.5 shadow-sm"><span class="material-symbols-outlined text-[18px] text-primary flex-shrink-0">psychology_alt</span><span class="font-label-sm text-[10px] font-bold uppercase tracking-tight">REALITY CHECK: THINKING ICED LATTE COUNTS AS WATER IS PURE DELULU! 🙅‍♂️</span></div>
+<div class="flex flex-col gap-2">
+<label class="font-label-sm uppercase font-bold text-on-surface">DRINK TYPE</label>
+<select class="w-full comic-border-2 rounded-lg p-2 font-body-md bg-surface font-bold text-on-surface focus:outline-none focus:ring-2 focus:ring-primary" id="modal-drink-type">
+<option value="Plain Water">💧 Plain Water</option>
+<option value="Sparkling Water">🫧 Sparkling Water</option>
+<option value="Electrolyte Hydration">⚡ Electrolyte Drink</option>
+<option value="Green Tea">🍵 Green Tea</option>
+<option value="Chamomile Tea">🌼 Chamomile Tea</option>
+<option value="Cold Brew Coffee">☕ Iced Americano</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-sm uppercase font-bold text-on-surface">AMOUNT (ML)</label>
+<div class="grid grid-cols-4 gap-2">
+<button class="amount-btn comic-border-2 rounded-lg py-1.5 font-bold font-headline-sm text-headline-sm hover:bg-secondary-container bg-surface" data-ml="250" type="button">250</button>
+<button class="amount-btn comic-border-2 rounded-lg py-1.5 font-bold font-headline-sm text-headline-sm bg-secondary-container" data-ml="350" type="button">350</button>
+<button class="amount-btn comic-border-2 rounded-lg py-1.5 font-bold font-headline-sm text-headline-sm hover:bg-secondary-container bg-surface" data-ml="500" type="button">500</button>
+<button class="amount-btn comic-border-2 rounded-lg py-1.5 font-bold font-headline-sm text-headline-sm hover:bg-secondary-container bg-surface" data-ml="750" type="button">750</button>
+</div>
+<input class="w-full comic-border-2 rounded-lg p-2 text-center font-headline-sm text-headline-sm bg-surface mt-1 focus:outline-none" id="modal-amount-input" type="number" value="350">
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-sm uppercase font-bold text-on-surface">TIME</label>
+<input class="w-full comic-border-2 rounded-lg p-2 font-body-md bg-surface font-bold text-center focus:outline-none" id="modal-time-input" type="time" value="14:30">
+</div>
+<button class="w-full h-12 bg-secondary-container hover:bg-secondary-fixed text-on-surface comic-border comic-shadow-sm rounded-lg font-headline-sm text-headline-sm uppercase tracking-wide flex items-center justify-center gap-2 mt-2" id="modal-submit-btn"><span class="material-symbols-outlined font-bold">bolt</span> LET HIM COOK ⚡ LOG TO ARCHIVE</button>
+</div>
+</div>
+<script>
+// Mock Hydration Dataset across months (Year 2026)
+const mockDatabase = {
+  // Key format: YYYY-M-D (M: 0-11, D: 1-31)
+  "2026-9-24": { // October 24, 2026 (Month index 9 is October)
+    goal: 2500,
+    drinks: [
+      { id: 'e1', time: '07:45 AM', name: 'Plain Water', ml: 300, tag: 'WAKE-UP', sub: 'Hydration Boost', icon: 'water_bottle', bg: 'bg-tertiary-fixed', iconColor: 'text-tertiary' },
+      { id: 'e2', time: '09:30 AM', name: 'Organic Green Tea', ml: 250, tag: 'FOCUS', sub: 'Work Session', icon: 'emoji_food_beverage', bg: 'bg-secondary-container', iconColor: 'text-secondary' },
+      { id: 'e3', time: '11:45 AM', name: 'Sparkling Mineral Water', ml: 500, tag: 'POST-WALK', sub: 'Outdoor Stroll', icon: 'local_drink', bg: 'bg-tertiary-fixed', iconColor: 'text-tertiary' },
+      { id: 'e4', time: '01:15 PM', name: 'Filtered Chilled Water', ml: 350, tag: 'LUNCH', sub: 'Midday Meal', icon: 'glass_cup', bg: 'bg-primary-fixed', iconColor: 'text-primary' },
+      { id: 'e5', time: '04:00 PM', name: 'Citrus Electrolyte Drink', ml: 500, tag: 'GYM BEAST', sub: 'Heavy Lifting', icon: 'bolt', bg: 'bg-secondary-container', iconColor: 'text-on-surface' },
+      { id: 'e6', time: '06:45 PM', name: 'Crisp Ice Water', ml: 500, tag: 'DINNER', sub: 'Evening Meal', icon: 'ac_unit', bg: 'bg-tertiary-fixed-dim', iconColor: 'text-on-tertiary-fixed' },
+      { id: 'e7', time: '09:30 PM', name: 'Chamomile Infusion', ml: 450, tag: 'NIGHT CAP', sub: 'Sleep Prep', icon: 'bedtime', bg: 'bg-secondary-fixed-dim', iconColor: 'text-on-secondary-fixed' }
+    ]
+  },
+  "2026-9-23": {
+    goal: 2500,
+    drinks: [
+      { id: 'e23-1', time: '08:00 AM', name: 'Plain Water', ml: 400, tag: 'MORNING', sub: 'Kickstart', icon: 'water_bottle', bg: 'bg-tertiary-fixed', iconColor: 'text-tertiary' },
+      { id: 'e23-2', time: '12:30 PM', name: 'Ice Water', ml: 600, tag: 'LUNCH', sub: 'Hydrate', icon: 'glass_cup', bg: 'bg-primary-fixed', iconColor: 'text-primary' },
+      { id: 'e23-3', time: '03:15 PM', name: 'Sparkling Water', ml: 500, tag: 'SNACK', sub: 'Fizz', icon: 'local_drink', bg: 'bg-tertiary-fixed', iconColor: 'text-tertiary' },
+      { id: 'e23-4', time: '07:00 PM', name: 'Electrolyte Splash', ml: 600, tag: 'TRAINING', sub: 'Run Recovery', icon: 'bolt', bg: 'bg-secondary-container', iconColor: 'text-on-surface' },
+      { id: 'e23-5', time: '09:45 PM', name: 'Warm Mint Tea', ml: 450, tag: 'RELAX', sub: 'Night Chill', icon: 'bedtime', bg: 'bg-secondary-fixed-dim', iconColor: 'text-on-secondary-fixed' }
+    ]
+  },
+  "2026-9-22": {
+    goal: 2500,
+    drinks: [
+      { id: 'e22-1', time: '08:30 AM', name: 'Spring Water', ml: 500, tag: 'WAKE-UP', sub: 'Fresh start', icon: 'water_bottle', bg: 'bg-tertiary-fixed', iconColor: 'text-tertiary' },
+      { id: 'e22-2', time: '01:00 PM', name: 'Chilled Water', ml: 500, tag: 'LUNCH', sub: 'Hydration', icon: 'glass_cup', bg: 'bg-primary-fixed', iconColor: 'text-primary' },
+      { id: 'e22-3', time: '05:30 PM', name: 'Citrus Water', ml: 800, tag: 'WORKOUT', sub: 'Cycling', icon: 'bolt', bg: 'bg-secondary-container', iconColor: 'text-on-surface' },
+      { id: 'e22-4', time: '08:45 PM', name: 'Herbal Infusion', ml: 700, tag: 'REST', sub: 'Decompress', icon: 'emoji_food_beverage', bg: 'bg-secondary-container', iconColor: 'text-secondary' }
+    ]
+  },
+  "2026-9-3": {
+    goal: 2500,
+    drinks: [
+      { id: 'e3-1', time: '09:00 AM', name: 'Plain Water', ml: 500, tag: 'DESK', sub: 'Morning sip', icon: 'water_bottle', bg: 'bg-tertiary-fixed', iconColor: 'text-tertiary' },
+      { id: 'e3-2', time: '01:30 PM', name: 'Lemon Water', ml: 500, tag: 'LUNCH', sub: 'Zesty boost', icon: 'glass_cup', bg: 'bg-primary-fixed', iconColor: 'text-primary' },
+      { id: 'e3-3', time: '06:00 PM', name: 'Electrolyte', ml: 875, tag: 'AFTERNOON', sub: 'Recharge', icon: 'bolt', bg: 'bg-secondary-container', iconColor: 'text-on-surface' }
+    ]
+  },
+  "2026-9-6": {
+    goal: 2500,
+    drinks: [
+      { id: 'e6-1', time: '08:15 AM', name: 'Plain Water', ml: 600, tag: 'MORNING', sub: 'Pure', icon: 'water_bottle', bg: 'bg-tertiary-fixed', iconColor: 'text-tertiary' },
+      { id: 'e6-2', time: '12:00 PM', name: 'Mineral Water', ml: 600, tag: 'LUNCH', sub: 'Sparkle', icon: 'local_drink', bg: 'bg-tertiary-fixed', iconColor: 'text-tertiary' },
+      { id: 'e6-3', time: '04:30 PM', name: 'Cold Tea', ml: 800, tag: 'BREAK', sub: 'Cool down', icon: 'emoji_food_beverage', bg: 'bg-secondary-container', iconColor: 'text-secondary' }
+    ]
+  },
+  "2026-9-11": {
+    goal: 2500,
+    drinks: [
+      { id: 'e11-1', time: '09:00 AM', name: 'Plain Water', ml: 500, tag: 'MORNING', sub: 'Standard', icon: 'water_bottle', bg: 'bg-tertiary-fixed', iconColor: 'text-tertiary' },
+      { id: 'e11-2', time: '02:00 PM', name: 'Iced Water', ml: 500, tag: 'DESK', sub: 'Hydration', icon: 'glass_cup', bg: 'bg-primary-fixed', iconColor: 'text-primary' },
+      { id: 'e11-3', time: '06:30 PM', name: 'Green Tea', ml: 500, tag: 'DINNER', sub: 'Warm up', icon: 'emoji_food_beverage', bg: 'bg-secondary-container', iconColor: 'text-secondary' }
+    ]
+  },
+  "2026-9-16": {
+    goal: 2500,
+    drinks: [
+      { id: 'e16-1', time: '08:00 AM', name: 'Plain Water', ml: 650, tag: 'MORNING', sub: 'Wake-up', icon: 'water_bottle', bg: 'bg-tertiary-fixed', iconColor: 'text-tertiary' },
+      { id: 'e16-2', time: '01:15 PM', name: 'Chilled Water', ml: 700, tag: 'MIDDAY', sub: 'Hydrate', icon: 'glass_cup', bg: 'bg-primary-fixed', iconColor: 'text-primary' },
+      { id: 'e16-3', time: '05:45 PM', name: 'Protein Shake (Water)', ml: 400, tag: 'GYM', sub: 'Workout fuel', icon: 'bolt', bg: 'bg-secondary-container', iconColor: 'text-on-surface' },
+      { id: 'e16-4', time: '08:30 PM', name: 'Mint Infusion', ml: 375, tag: 'NIGHT', sub: 'Unwind', icon: 'bedtime', bg: 'bg-secondary-fixed-dim', iconColor: 'text-on-secondary-fixed' }
+    ]
+  }
+};
+
+// Fill some automated dummy entries for other October 2026 days to make the grid pop-art rich
+for (let d = 1; d <= 21; d++) {
+  const key = `2026-9-${d}`;
+  if (!mockDatabase[key]) {
+    if (d % 4 === 0) {
+      mockDatabase[key] = {
+        goal: 2500,
+        drinks: [
+          { id: `auto-${d}-1`, time: '08:15 AM', name: 'Tap Water', ml: 500, tag: 'MORNING', sub: 'Day starter', icon: 'water_bottle', bg: 'bg-tertiary-fixed', iconColor: 'text-tertiary' },
+          { id: `auto-${d}-2`, time: '02:00 PM', name: 'Sparkling Lime', ml: 500, tag: 'AFTERNOON', sub: 'Fizzy thirst', icon: 'local_drink', bg: 'bg-secondary-container', iconColor: 'text-secondary' },
+          { id: `auto-${d}-3`, time: '07:30 PM', name: 'Water', ml: 800, tag: 'DINNER', sub: 'Evening sip', icon: 'glass_cup', bg: 'bg-primary-fixed', iconColor: 'text-primary' }
+        ]
+      };
+    } else {
+      mockDatabase[key] = {
+        goal: 2500,
+        drinks: [
+          { id: `auto-${d}-1`, time: '08:00 AM', name: 'Plain Water', ml: 500, tag: 'WAKE-UP', sub: 'Kickstart', icon: 'water_bottle', bg: 'bg-tertiary-fixed', iconColor: 'text-tertiary' },
+          { id: `auto-${d}-2`, time: '11:30 AM', name: 'Spring Water', ml: 600, tag: 'MIDDAY', sub: 'Desk boost', icon: 'water_bottle', bg: 'bg-tertiary-fixed', iconColor: 'text-tertiary' },
+          { id: `auto-${d}-3`, time: '02:30 PM', name: 'Electrolyte', ml: 650, tag: 'WORKOUT', sub: 'Power', icon: 'bolt', bg: 'bg-secondary-container', iconColor: 'text-on-surface' },
+          { id: `auto-${d}-4`, time: '06:00 PM', name: 'Sparkling Mineral', ml: 500, tag: 'DINNER', sub: 'Table glass', icon: 'local_drink', bg: 'bg-tertiary-fixed', iconColor: 'text-tertiary' },
+          { id: `auto-${d}-5`, time: '09:00 PM', name: 'Chamomile', ml: 350, tag: 'RELAX', sub: 'Snooze', icon: 'bedtime', bg: 'bg-secondary-fixed-dim', iconColor: 'text-on-secondary-fixed' }
+        ]
+      };
+    }
+  }
+}
+
+// Current calendar navigation state (defaulting to October 2026)
+let viewYear = 2026;
+let viewMonth = 9; // October (0-indexed)
+let selectedDate = new Date(2026, 9, 24); // Oct 24, 2026 default active (Saturday)
+
+const MONTH_NAMES = [
+  "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+  "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
+];
+const DAY_NAMES = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
+
+function getDayHydrationData(year, month, day) {
+  const key = `${year}-${month}-${day}`;
+  if (mockDatabase[key]) {
+    return mockDatabase[key];
+  }
+  return { goal: 2500, drinks: [] };
+}
+
+function renderCalendar() {
+  const monthLabel = document.getElementById('current-month-label');
+  monthLabel.textContent = `${MONTH_NAMES[viewMonth]} ${viewYear}`;
+
+  const issueBadge = document.getElementById('issue-badge');
+  issueBadge.textContent = `ISSUE #${(viewYear % 100) * 12 + (viewMonth + 1)} ARCHIVE`;
+
+  const grid = document.getElementById('history-calendar-grid');
+  grid.innerHTML = '';
+
+  const firstDayIndex = new Date(viewYear, viewMonth, 1).getDay();
+  // Monday start: Sunday is 6, Mon is 0, Tue is 1...
+  const startingCol = (firstDayIndex === 0) ? 6 : firstDayIndex - 1;
+
+  const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+  const prevMonthDays = new Date(viewYear, viewMonth, 0).getDate();
+
+  // Previous month trailing days
+  for (let i = startingCol - 1; i >= 0; i--) {
+    const prevDayNum = prevMonthDays - i;
+    const div = document.createElement('div');
+    div.className = "h-10 flex items-center justify-center font-label-sm text-label-sm text-outline opacity-40 select-none";
+    div.textContent = prevDayNum;
+    grid.appendChild(div);
+  }
+
+  // Days of current month
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dayData = getDayHydrationData(viewYear, viewMonth, day);
+    const totalMl = dayData.drinks.reduce((acc, curr) => acc + curr.ml, 0);
+    const percent = Math.min(100, Math.round((totalMl / dayData.goal) * 100));
+
+    const isSelected = selectedDate &&
+      selectedDate.getFullYear() === viewYear &&
+      selectedDate.getMonth() === viewMonth &&
+      selectedDate.getDate() === day;
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+
+    let bgStyle = 'bg-surface-container';
+    let contentHtml = `<span class="font-label-sm text-label-sm leading-none text-on-surface-variant">${day}</span>`;
+
+    if (totalMl >= dayData.goal) {
+      bgStyle = 'bg-secondary-container';
+      contentHtml = `
+        <span class="font-label-sm text-label-sm leading-none text-on-surface">${day}</span>
+        <span class="material-symbols-outlined text-[10px] text-primary" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+      `;
+    } else if (totalMl > 0) {
+      bgStyle = 'bg-tertiary-fixed';
+      contentHtml = `
+        <span class="font-label-sm text-label-sm leading-none text-on-surface">${day}</span>
+        <span class="font-label-sm text-[8px] leading-none text-on-tertiary-fixed-variant font-bold">${percent}%</span>
+      `;
+    }
+
+    if (isSelected) {
+      btn.className = `h-10 border-[3px] border-primary-container ${bgStyle} comic-shadow-md rounded flex flex-col items-center justify-center relative scale-105 z-10 active:translate-x-0.5 active:translate-y-0.5 pt-1`;
+      contentHtml = `
+        <span class="absolute -top-2.5 bg-error text-on-error font-label-sm text-[8px] px-1 py-0.2 rounded-sm uppercase tracking-tighter shadow-sm font-bold z-10">SELECTED</span>
+        <span class="font-label-md text-label-md leading-none text-primary font-bold mt-0.5">${day}</span>
+        ${totalMl >= dayData.goal ? `<span class="material-symbols-outlined text-[10px] text-primary" style="font-variation-settings: 'FILL' 1;">water_drop</span>` : `<span class="font-label-sm text-[8px] leading-none text-on-surface font-bold">${percent}%</span>`}
+      `;
+    } else {
+      btn.className = `h-10 comic-border-2 comic-shadow-sm ${bgStyle} rounded flex flex-col items-center justify-center relative active:translate-x-0.5 active:translate-y-0.5 transition-transform`;
+    }
+
+    btn.innerHTML = contentHtml;
+    btn.addEventListener('click', () => {
+      selectedDate = new Date(viewYear, viewMonth, day);
+      renderCalendar();
+      updateSelectedDayView();
+    });
+
+    grid.appendChild(btn);
+  }
+
+  // Next month leading days to complete the 7-column grid
+  const totalRendered = startingCol + daysInMonth;
+  const remainingCells = (7 - (totalRendered % 7)) % 7;
+  for (let nextDay = 1; nextDay <= remainingCells; nextDay++) {
+    const div = document.createElement('div');
+    div.className = "h-10 flex items-center justify-center font-label-sm text-label-sm text-outline opacity-40 select-none";
+    div.textContent = nextDay;
+    grid.appendChild(div);
+  }
+}
+
+function updateSelectedDayView() {
+  if (!selectedDate) return;
+  const year = selectedDate.getFullYear();
+  const month = selectedDate.getMonth();
+  const day = selectedDate.getDate();
+  const dayOfWeek = DAY_NAMES[selectedDate.getDay()];
+  const monthShort = MONTH_NAMES[month].substring(0, 3);
+
+  // Update Ribbon Date
+  document.getElementById('selected-day-label').textContent = `${dayOfWeek}, ${monthShort} ${day}, ${year}`;
+
+  const dayData = getDayHydrationData(year, month, day);
+  const totalMl = dayData.drinks.reduce((sum, d) => sum + d.ml, 0);
+  const goalMl = dayData.goal;
+  const percent = Math.round((totalMl / goalMl) * 100);
+
+  // Update Intake Numbers
+  document.getElementById('selected-total-ml').textContent = totalMl.toLocaleString();
+  document.getElementById('selected-goal-ml').textContent = `/ ${goalMl.toLocaleString()} ML`;
+
+  // Update progress bar
+  const progressBar = document.getElementById('selected-progress-bar');
+  progressBar.style.width = `${Math.min(100, percent)}%`;
+
+  // Update Comic Callout Badge
+  const calloutTitle = document.getElementById('status-callout-title');
+  const calloutSubtitle = document.getElementById('status-callout-subtitle');
+  const calloutBadge = document.getElementById('status-callout-badge');
+
+  if (percent >= 100) {
+    calloutBadge.className = "comic-border-2 comic-shadow-sm bg-secondary-container text-on-surface px-space-xs py-1 rounded rotate-[3deg] text-center flex flex-col items-center flex-shrink-0";
+    calloutTitle.textContent = "BOOM!";
+    calloutSubtitle.textContent = "GOAL SMASHED!";
+  } else if (percent >= 50) {
+    calloutBadge.className = "comic-border-2 comic-shadow-sm bg-tertiary-fixed text-on-tertiary-fixed px-space-xs py-1 rounded rotate-[-2deg] text-center flex flex-col items-center flex-shrink-0";
+    calloutTitle.textContent = "NICE!";
+    calloutSubtitle.textContent = `${percent}% CRUSHED`;
+  } else if (totalMl > 0) {
+    calloutBadge.className = "comic-border-2 comic-shadow-sm bg-surface-container-highest text-on-surface px-space-xs py-1 rounded rotate-[2deg] text-center flex flex-col items-center flex-shrink-0";
+    calloutTitle.textContent = "CHUG!";
+    calloutSubtitle.textContent = "MORE WATER!";
+  } else {
+    calloutBadge.className = "comic-border-2 comic-shadow-sm bg-surface-container-highest text-on-surface-variant px-space-xs py-1 rounded rotate-[0deg] text-center flex flex-col items-center flex-shrink-0";
+    calloutTitle.textContent = "DRY!";
+    calloutSubtitle.textContent = "NO LOGS YET";
+  }
+
+  // Update overview quick stats
+  document.getElementById('summary-drink-count').textContent = `${dayData.drinks.length} LOGS`;
+  if (dayData.drinks.length > 0) {
+    document.getElementById('summary-first-sip').textContent = dayData.drinks[0].time;
+    document.getElementById('summary-last-sip').textContent = dayData.drinks[dayData.drinks.length - 1].time;
+  } else {
+    document.getElementById('summary-first-sip').textContent = "--:--";
+    document.getElementById('summary-last-sip').textContent = "--:--";
+  }
+
+  // Update activity logs
+  renderActivityLogs(dayData.drinks, year, month, day);
+}
+
+function renderActivityLogs(drinks, year, month, day) {
+  const container = document.getElementById('activity-logs-container');
+  container.innerHTML = '';
+
+  if (drinks.length === 0) {
+    container.innerHTML = `
+      <div class="comic-border comic-shadow-sm bg-surface-container-lowest rounded-xl p-6 text-center flex flex-col items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-4xl text-outline">water_drop</span>
+        <p class="font-headline-sm uppercase text-on-surface text-lg">No entries logged for this date!</p>
+        <p class="font-body-md text-on-surface-variant text-sm">Tap the yellow button below to record past drinks.</p>
+      </div>
+    `;
+    return;
+  }
+
+  drinks.forEach((item, index) => {
+    const card = document.createElement('div');
+    card.className = "comic-border comic-shadow-sm bg-surface-container-lowest rounded-xl p-space-sm flex items-center justify-between gap-space-sm transition-transform active:translate-x-0.5 active:translate-y-0.5";
+    card.innerHTML = `
+      <div class="flex items-center gap-space-sm min-w-0">
+        <div class="w-12 h-12 rounded-lg ${item.bg || 'bg-tertiary-fixed'} comic-border-2 comic-shadow-sm flex items-center justify-center flex-shrink-0">
+          <span class="material-symbols-outlined text-[26px] ${item.iconColor || 'text-tertiary'}" style="font-variation-settings: 'FILL' 1;">${item.icon || 'water_drop'}</span>
+        </div>
+        <div class="flex flex-col min-w-0">
+          <div class="flex items-center gap-1.5">
+            <span class="font-headline-sm text-headline-sm text-on-surface leading-none">${item.ml} ML</span>
+            <span class="bg-secondary-container text-on-surface font-label-sm text-[9px] px-1 py-0.2 rounded font-bold uppercase">${item.tag || 'DRINK'}</span>
+          </div>
+          <span class="font-title-md text-title-md text-on-surface truncate mt-0.5">${item.name}</span>
+          <span class="font-label-sm text-label-sm text-outline uppercase font-medium">${item.time} • ${item.sub || 'Hydration'}</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-1 flex-shrink-0">
+        <button aria-label="Edit Entry" class="edit-btn w-8 h-8 rounded comic-border-2 bg-surface-container hover:bg-secondary-container flex items-center justify-center text-on-surface" type="button" data-idx="${index}">
+          <span class="material-symbols-outlined text-[16px]">edit</span>
+        </button>
+        <button aria-label="Delete Entry" class="delete-btn w-8 h-8 rounded comic-border-2 bg-surface-container hover:bg-error-container hover:text-on-error-container flex items-center justify-center text-on-surface" type="button" data-idx="${index}">
+          <span class="material-symbols-outlined text-[16px]">delete</span>
+        </button>
+      </div>
+    `;
+
+    // Delete item functionality
+    card.querySelector('.delete-btn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      const key = `${year}-${month}-${day}`;
+      if (mockDatabase[key]) {
+        mockDatabase[key].drinks.splice(index, 1);
+        renderCalendar();
+        updateSelectedDayView();
+      }
+    });
+
+    // Quick edit ml amount functionality
+    card.querySelector('.edit-btn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      const newAmount = prompt(`Update volume (ML) for ${item.name}:`, item.ml);
+      if (newAmount && !isNaN(newAmount) && Number(newAmount) > 0) {
+        item.ml = parseInt(newAmount, 10);
+        renderCalendar();
+        updateSelectedDayView();
+      }
+    });
+
+    container.appendChild(card);
+  });
+}
+
+// Navigation Listeners
+document.getElementById('prev-month-btn').addEventListener('click', () => {
+  viewMonth--;
+  if (viewMonth < 0) {
+    viewMonth = 11;
+    viewYear--;
+  }
+  renderCalendar();
+});
+
+document.getElementById('next-month-btn').addEventListener('click', () => {
+  viewMonth++;
+  if (viewMonth > 11) {
+    viewMonth = 0;
+    viewYear++;
+  }
+  renderCalendar();
+});
+
+// Modal Logic for Logging Past Drink
+const logModal = document.getElementById('log-modal');
+const openModalBtn = document.getElementById('log-past-drink-btn');
+const closeModalBtn = document.getElementById('modal-close-btn');
+const submitLogBtn = document.getElementById('modal-submit-btn');
+
+openModalBtn.addEventListener('click', () => {
+  logModal.classList.remove('hidden');
+});
+
+closeModalBtn.addEventListener('click', () => {
+  logModal.classList.add('hidden');
+});
+
+logModal.addEventListener('click', (e) => {
+  if (e.target === logModal) {
+    logModal.classList.add('hidden');
+  }
+});
+
+// Amount quick pills
+document.querySelectorAll('.amount-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.amount-btn').forEach(b => {
+      b.classList.remove('bg-secondary-container');
+      b.classList.add('bg-surface');
+    });
+    btn.classList.add('bg-secondary-container');
+    btn.classList.remove('bg-surface');
+    document.getElementById('modal-amount-input').value = btn.dataset.ml;
+  });
+});
+
+submitLogBtn.addEventListener('click', () => {
+  const drinkName = document.getElementById('modal-drink-type').value;
+  const amount = parseInt(document.getElementById('modal-amount-input').value, 10) || 300;
+  const timeRaw = document.getElementById('modal-time-input').value || '12:00';
+  
+  // Format 24h time to 12h AM/PM
+  const [h, m] = timeRaw.split(':');
+  let hours = parseInt(h, 10);
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12 || 12;
+  const formattedTime = `${String(hours).padStart(2, '0')}:${m} ${ampm}`;
+
+  const year = selectedDate.getFullYear();
+  const month = selectedDate.getMonth();
+  const day = selectedDate.getDate();
+  const key = `${year}-${month}-${day}`;
+
+  if (!mockDatabase[key]) {
+    mockDatabase[key] = { goal: 2500, drinks: [] };
+  }
+
+  mockDatabase[key].drinks.push({
+    id: `log-${Date.now()}`,
+    time: formattedTime,
+    name: drinkName,
+    ml: amount,
+    tag: 'LOGGED',
+    sub: 'Manual Entry',
+    icon: drinkName.includes('Tea') ? 'emoji_food_beverage' : drinkName.includes('Electrolyte') ? 'bolt' : 'water_drop',
+    bg: 'bg-secondary-container',
+    iconColor: 'text-primary'
+  });
+
+  // Sort drinks chronologically roughly by time string
+  mockDatabase[key].drinks.sort((a, b) => a.time.localeCompare(b.time));
+
+  logModal.classList.add('hidden');
+  renderCalendar();
+  updateSelectedDayView();
+});
+
+// Initial boot
+renderCalendar();
+updateSelectedDayView();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl" data-active-classes="bg-secondary-container text-on-surface comic-shadow-sm font-label-md"><div class="flex justify-around items-center h-20 px-margin gap-space-xs"><a class="flex-1 flex flex-col items-center justify-center min-h-[44px] py-space-xs comic-border rounded-lg bg-surface-container-lowest comic-shadow-sm text-on-surface transition-transform active:translate-x-0.5 active:translate-y-0.5" data-path="daily-hydration" href="#"><span class="material-symbols-outlined text-[22px]">water_drop</span><span class="font-label-sm text-label-sm uppercase leading-none mt-1">Home</span></a><a aria-current="page" class="flex-1 flex flex-col items-center justify-center min-h-[44px] py-space-xs rounded-lg transition-transform active:translate-x-0.5 active:translate-y-0.5 bg-secondary-container text-on-surface comic-shadow-sm font-label-md" data-path="hydration-history" href="#"><span class="material-symbols-outlined text-[22px]">calendar_month</span><span class="font-label-sm text-label-sm uppercase leading-none mt-1">History</span></a><a class="flex-1 flex flex-col items-center justify-center min-h-[44px] py-space-xs comic-border rounded-lg bg-surface-container-lowest comic-shadow-sm text-on-surface transition-transform active:translate-x-0.5 active:translate-y-0.5" data-path="hydration-insights" href="#"><span class="material-symbols-outlined text-[22px]">bar_chart</span><span class="font-label-sm text-label-sm uppercase leading-none mt-1">Insights</span></a><a class="flex-1 flex flex-col items-center justify-center min-h-[44px] py-space-xs comic-border rounded-lg bg-surface-container-lowest comic-shadow-sm text-on-surface transition-transform active:translate-x-0.5 active:translate-y-0.5" data-path="profile-settings" href="#"><span class="material-symbols-outlined text-[22px]">manage_accounts</span><span class="font-label-sm text-label-sm uppercase leading-none mt-1">Profile</span></a></div></nav></body></html>

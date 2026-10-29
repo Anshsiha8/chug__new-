@@ -1,0 +1,1023 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>CHUG! — Pop Art Authentication &amp; Onboarding</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Space+Grotesk:wght@500;700;800;900&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
+<script>tailwind.config = {theme: {extend: {fontFamily: {display: ["Anton"], comic: ["Space Grotesk", "sans-serif"], body: ["Space Grotesk"], headline: ["Anton"], label: ["Space Grotesk"]}, colors: {chugBlue: "#2455FF", chugCyan: "#42E8F5", chugYellow: "#FFE14D", chugPink: "#FF4FA3", chugRed: "#FF553D", chugInk: "#171717", chugCream: "#FFF8E8", "surface-bright": "#393939", "secondary-container": "#bca200", "inverse-on-surface": "#313030", "primary-fixed": "#dde1ff", "on-secondary-fixed": "#211b00", background: "#131313", "surface-container-lowest": "#0e0e0e", "inverse-primary": "#0a48f4", "on-error": "#690005", surface: "#131313", "surface-container-highest": "#353534", secondary: "#e2c633", "on-surface-variant": "#c4c5d9", "inverse-surface": "#e5e2e1", "on-secondary": "#393000", primary: "#b9c3ff", "tertiary-container": "#00757d", "surface-variant": "#353534", "on-primary": "#002388", "on-tertiary-fixed": "#002022", tertiary: "#29dbe7", "on-primary-fixed-variant": "#0034bf", "primary-fixed-dim": "#b9c3ff", "surface-container-high": "#2a2a2a", "surface-dim": "#131313", "on-surface": "#e5e2e1", "on-secondary-container": "#433900", "surface-container": "#201f1f", "on-error-container": "#ffdad6", "surface-tint": "#b9c3ff", "on-primary-fixed": "#001356", "primary-container": "#2455ff", outline: "#8e90a2", "on-tertiary-fixed-variant": "#004f54", "on-tertiary-container": "#a7f7ff", "error-container": "#93000a", "secondary-fixed": "#ffe256", "tertiary-fixed-dim": "#29dbe7", error: "#ffb4ab", "secondary-fixed-dim": "#e2c633", "on-tertiary": "#00363a", "on-primary-container": "#e6e8ff", "outline-variant": "#434656", "on-background": "#e5e2e1", "tertiary-fixed": "#7cf4ff", "surface-container-low": "#1c1b1b", "on-secondary-fixed-variant": "#534600"}, boxShadow: {pop: "4px 4px 0 #171717", "pop-lg": "6px 6px 0 #171717", "pop-sm": "2.5px 2.5px 0 #171717", "pop-active": "1px 1px 0 #171717"}, fontSize: {}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}}}};</script>
+<style>
+    .halftone-bg {
+      background-color: #FFF8E8;
+      background-image: radial-gradient(#171717 12%, transparent 12%);
+      background-position: 0 0;
+      background-size: 14px 14px;
+    }
+    .burst-shape {
+      clip-path: polygon(50% 0%, 63% 28%, 95% 15%, 82% 43%, 100% 60%, 75% 72%, 85% 100%, 55% 85%, 35% 100%, 38% 72%, 10% 75%, 25% 48%, 5% 30%, 36% 28%);
+    }
+    .comic-border {
+      border: 3px solid #171717;
+    }
+    .comic-border-thick {
+      border: 4px solid #171717;
+    }
+    .pop-btn {
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .pop-btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 #171717;
+    }
+    .pop-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 #171717;
+    }
+    /* Mascot Animation */
+    @keyframes mascot-bounce {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(-2deg); }
+    }
+    .animate-mascot {
+      animation: mascot-bounce 3s ease-in-out infinite;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .animate-mascot { animation: none; }
+      .pop-btn { transition: none; }
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FFF8E8;
+      border-left: 2px solid #171717;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #FFE14D;
+      border: 2px solid #171717;
+      border-radius: 4px;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-chugCream text-chugInk font-body min-h-screen selection:bg-chugPink selection:text-white">
+<!-- TOP HEADER / APP BAR -->
+<header class="sticky top-0 z-50 bg-white comic-border border-t-0 border-x-0 border-b-4 px-4 py-3 flex items-center justify-between shadow-sm"><div class="flex items-center gap-2.5 cursor-pointer" onclick="navigateTo('landing')"><img alt="CHUG Mascot Logo" class="w-10 h-10 rounded-xl comic-border shadow-pop-sm object-cover flex-shrink-0 -rotate-3" src="https://lh3.googleusercontent.com/aida/AEtjO1WdXx0gNN27FFqh1_U284EkOV7xkWOSTuPKrjLIIySA3_uziKHcFxts38qKpWxypR3FFrj31cyewc0171JqggQw5sJxerpazIGARSOFmbL_4YL8MOkMdTO3UDkPWzQCZP2BoMnWXJlONwXSSmbvoZLReN-yvFH4wATZ_ANJ5v_PEmbYVVkygZIs-agrFpX1DFellyo9-qex8yrx3wbWFbP5bSP3kRo_rhg1avzIVI2MCILd9RE-heLZ6K53"><div><div class="flex items-center gap-1.5"><span class="font-display text-2xl tracking-wider leading-none text-chugBlue uppercase">CHUG!</span><span class="bg-chugPink text-white font-comic text-[9px] font-black px-1.5 py-0.5 rounded border-2 border-chugInk shadow-pop-sm -rotate-2">POP SFX</span></div><p class="text-[10px] font-bold text-chugInk/70 tracking-tight leading-none mt-0.5">Sip Happens. Stay Hydrated.</p></div></div><div class="flex items-center gap-1.5"><button class="p-2 bg-white hover:bg-rose-50 text-chugRed comic-border rounded-lg font-comic text-xs font-bold shadow-pop-sm flex items-center justify-center" onclick="resetDemoData()" title="Reset demo"></button></div></header>
+<!-- MAIN CONTAINER (PAGE SWITCHER) -->
+<main class="max-w-md mx-auto p-4 pb-12 w-full"><section class="block transition-all duration-300 hidden" id="view-landing"><div class="flex flex-col gap-5 pt-1"><div class="flex justify-between items-center"><div class="inline-flex items-center gap-1.5 bg-chugYellow comic-border px-3 py-1 rounded-full shadow-pop-sm -rotate-1"><span class="text-xs font-black font-comic tracking-wide">⚡ ISSUE #1 — ZERO DEHYDRATION</span></div><div class="bg-white comic-border px-2.5 py-0.5 rounded-full text-[10px] font-comic font-black text-chugInk/70">MOBILE V1.0</div></div><div class="relative w-full bg-chugYellow rounded-3xl comic-border-thick p-4 sm:p-5 shadow-pop-lg overflow-hidden"><div class="absolute inset-0 opacity-15 halftone-bg pointer-events-none"></div><div class="absolute top-3 right-3 bg-chugPink text-white font-display text-base tracking-wider px-2.5 py-0.5 comic-border rounded-lg rotate-6 shadow-pop-sm z-20">BOOM!</div><div class="relative z-10 flex flex-col items-center text-center my-2"><div class="w-48 h-48 sm:w-56 sm:h-56 animate-mascot relative flex items-center justify-center"><img alt="CHUG! Superhero Water Mascot" class="w-full h-full object-contain rounded-2xl comic-border shadow-pop drop-shadow-[0_10px_0_rgba(0,0,0,0.15)]" src="https://lh3.googleusercontent.com/aida/AEtjO1WdXx0gNN27FFqh1_U284EkOV7xkWOSTuPKrjLIIySA3_uziKHcFxts38qKpWxypR3FFrj31cyewc0171JqggQw5sJxerpazIGARSOFmbL_4YL8MOkMdTO3UDkPWzQCZP2BoMnWXJlONwXSSmbvoZLReN-yvFH4wATZ_ANJ5v_PEmbYVVkygZIs-agrFpX1DFellyo9-qex8yrx3wbWFbP5bSP3kRo_rhg1avzIVI2MCILd9RE-heLZ6K53"></div><div class="mt-3.5 bg-white comic-border px-3.5 py-1.5 rounded-xl shadow-pop flex items-center gap-2.5"><span class="text-xl">⚡</span><div class="text-left"><p class="text-[9px] font-black font-comic uppercase text-chugInk/60 leading-none">HERO STATUS</p><p class="font-display text-base text-chugBlue tracking-wide uppercase leading-tight">LEVEL 5 HYDRA-BEAST</p></div></div></div><div class="relative z-10 grid grid-cols-3 gap-1.5 text-center pt-3 border-t-4 border-chugInk"><div class="bg-white/95 comic-border py-1.5 px-1 rounded-lg"><p class="font-display text-base leading-tight text-chugBlue">NO CAP</p><p class="text-[9px] font-black uppercase text-chugInk leading-tight">VALID SIP</p></div><div class="bg-white/95 comic-border py-1.5 px-1 rounded-lg"><p class="font-display text-base leading-tight text-chugPink">LOCK IN</p><p class="text-[9px] font-black uppercase text-chugInk leading-tight">MAIN HERO</p></div><div class="bg-white/95 comic-border py-1.5 px-1 rounded-lg"><p class="font-display text-base leading-tight text-emerald-600">0 DELULU</p><p class="text-[9px] font-black uppercase text-chugInk leading-tight">LATTE ≠ H2O</p></div></div></div><div class="space-y-3"><h1 class="font-display text-5xl sm:text-6xl tracking-tight leading-[0.95] text-chugInk uppercase">READY TO <span class="text-chugBlue underline decoration-chugPink decoration-8 underline-offset-4">CHUG?</span></h1><p class="font-comic text-lg font-bold text-chugInk/85">"Your water. Your rhythm. Your rules."</p><p class="font-body text-xs text-chugInk/80 font-medium leading-relaxed">Smash your daily hydration goals with personalized smart alerts, superhero tracking, and zero boring notification fatigue.</p><div class="relative bg-white comic-border-thick p-3 rounded-xl shadow-pop w-full rotate-1"><p class="font-comic font-black text-xs uppercase text-chugBlue tracking-wide flex items-center gap-1.5">💬 "Time to lock in. Down 500ml before your next task!"</p><div class="absolute -bottom-2.5 left-6 w-3 h-3 bg-white border-b-4 border-r-4 border-chugInk rotate-45"></div></div></div><div class="pt-2 flex flex-col gap-2.5 w-full"><button class="pop-btn w-full py-3.5 px-4 bg-chugBlue text-white font-display text-xl tracking-wide rounded-xl comic-border shadow-pop uppercase hover:bg-blue-600 flex items-center justify-center gap-2" onclick="navigateTo('register')"><span class="">CREATE ACCOUNT</span><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 7l5 5m0 0l-5 5m5-5H6" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path></svg></button><button class="pop-btn w-full py-3 px-4 bg-chugYellow text-chugInk font-display text-xl tracking-wide rounded-xl comic-border shadow-pop uppercase hover:bg-yellow-300 text-center" onclick="navigateTo('login')">LOG IN</button><button class="w-full py-2.5 text-center text-xs font-comic font-black text-chugInk/80 hover:text-chugBlue underline underline-offset-4 decoration-2" onclick="startGuestOnboarding()">⚡ ENTER HYDRATED ERA — LOCK IN AS GUEST (NO CAP)</button></div></div></section><section class="transition-all duration-300 hidden" id="view-register"><div class="w-full"><button class="mb-3 inline-flex items-center gap-1 font-comic font-black text-xs text-chugInk/70 hover:text-chugInk uppercase" onclick="navigateTo('landing')"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path></svg>BACK TO WELCOME</button><div class="bg-white comic-border-thick rounded-2xl p-5 shadow-pop-lg relative"><div class="inline-block bg-chugPink text-white font-comic font-black text-[10px] px-2.5 py-0.5 rounded comic-border shadow-pop-sm -rotate-2 mb-2">FRONTEND DEMO AUTH</div><h2 class="font-display text-3xl sm:text-4xl text-chugInk uppercase leading-tight mb-1">JOIN THE <span class="text-chugBlue">CHUG!</span> SQUAD</h2><p class="text-xs font-comic font-bold text-chugInk/70 mb-4">Create your demo profile in seconds. All data stays in your browser.</p><form class="space-y-3" id="registerForm" onsubmit="handleRegisterSubmit(event)"><div><label class="block font-comic font-black text-[11px] uppercase tracking-wider text-chugInk mb-1">Handle / Name <span class="text-chugRed">*</span></label><input class="w-full px-3 py-2.5 bg-chugCream font-comic font-bold text-sm text-chugInk comic-border rounded-xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-chugBlue shadow-inner" id="regName" placeholder="e.g. Alex Rivera" required="" type="text"><p class="hidden text-xs font-bold text-chugRed mt-0.5" id="regNameError">Please enter your handle.</p></div><div><label class="block font-comic font-black text-[11px] uppercase tracking-wider text-chugInk mb-1">Email <span class="text-chugRed">*</span></label><input class="w-full px-3 py-2.5 bg-chugCream font-comic font-bold text-sm text-chugInk comic-border rounded-xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-chugBlue shadow-inner" id="regEmail" placeholder="alex@example.com" required="" type="email"><p class="hidden text-xs font-bold text-chugRed mt-0.5" id="regEmailError">Please enter a valid email.</p></div><div><label class="block font-comic font-black text-[11px] uppercase tracking-wider text-chugInk mb-1">Password <span class="text-chugRed">*</span> (8+ chars)</label><div class="relative"><input class="w-full px-3 py-2.5 bg-chugCream font-comic font-bold text-sm text-chugInk comic-border rounded-xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-chugBlue shadow-inner pr-10" id="regPassword" placeholder="••••••••" required="" type="password"><button class="absolute right-2.5 top-1/2 -translate-y-1/2 text-chugInk/60 hover:text-chugInk font-comic font-bold text-xs p-1" onclick="togglePasswordVisibility('regPassword')" type="button">👁️</button></div><p class="hidden text-xs font-bold text-chugRed mt-0.5" id="regPasswordError">Password must be at least 8 characters.</p></div><div><label class="block font-comic font-black text-[11px] uppercase tracking-wider text-chugInk mb-1">Confirm Password <span class="text-chugRed">*</span></label><div class="relative"><input class="w-full px-3 py-2.5 bg-chugCream font-comic font-bold text-sm text-chugInk comic-border rounded-xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-chugBlue shadow-inner pr-10" id="regPasswordConfirm" placeholder="••••••••" required="" type="password"><button class="absolute right-2.5 top-1/2 -translate-y-1/2 text-chugInk/60 hover:text-chugInk font-comic font-bold text-xs p-1" onclick="togglePasswordVisibility('regPasswordConfirm')" type="button">👁️</button></div><p class="hidden text-xs font-bold text-chugRed mt-0.5" id="regConfirmError">Passwords do not match.</p></div><div class="flex items-start gap-2 pt-0.5"><input class="mt-1 w-4 h-4 rounded text-chugBlue focus:ring-chugBlue border-2 border-chugInk" id="regTerms" required="" type="checkbox"><label class="text-[11px] font-body font-semibold text-chugInk/80 leading-snug" for="regTerms">I agree to the <span class="underline text-chugBlue font-bold">Thirst Defense Terms</span> and demo privacy.</label></div><div class="pt-1"><button class="pop-btn w-full py-3.5 bg-chugYellow hover:bg-yellow-300 text-chugInk font-display text-xl tracking-wide rounded-xl comic-border shadow-pop uppercase flex items-center justify-center gap-2" id="regSubmitBtn" type="submit"><span class="">LET'S GO!</span><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path></svg></button></div></form><div class="mt-4 pt-3 border-t-2 border-chugInk/20 text-center font-comic text-xs font-bold text-chugInk/70">Already have an account? <button class="text-chugBlue underline underline-offset-2 ml-1 font-black" onclick="navigateTo('login')">LOG IN</button></div></div></div></section><section class="transition-all duration-300 hidden" id="view-login"><div class="w-full"><button class="mb-3 inline-flex items-center gap-1 font-comic font-black text-xs text-chugInk/70 hover:text-chugInk uppercase" onclick="navigateTo('landing')"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path></svg>BACK TO WELCOME</button><div class="bg-white comic-border-thick rounded-2xl p-5 shadow-pop-lg"><div class="inline-block bg-chugCyan text-chugInk font-comic font-black text-[10px] px-2.5 py-0.5 rounded comic-border shadow-pop-sm -rotate-2 mb-2">WELCOME BACK HERO</div><h2 class="font-display text-3xl sm:text-4xl text-chugInk uppercase leading-tight mb-1">LOG IN TO <span class="text-chugBlue">CHUG!</span></h2><p class="text-xs font-comic font-bold text-chugInk/70 mb-4">Enter your credentials or test with default hero demo.</p><form class="space-y-3" id="loginForm" onsubmit="handleLoginSubmit(event)"><div><label class="block font-comic font-black text-[11px] uppercase tracking-wider text-chugInk mb-1">Email Address</label><input class="w-full px-3 py-2.5 bg-chugCream font-comic font-bold text-sm text-chugInk comic-border rounded-xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-chugBlue shadow-inner" id="loginEmail" placeholder="alex@example.com" required="" type="email" value="alex@example.com"></div><div><div class="flex items-center justify-between mb-1"><label class="font-comic font-black text-[11px] uppercase tracking-wider text-chugInk">Password</label><button class="text-[11px] font-bold text-chugBlue underline font-comic" onclick="navigateTo('forgot')" type="button">Forgot?</button></div><div class="relative"><input class="w-full px-3 py-2.5 bg-chugCream font-comic font-bold text-sm text-chugInk comic-border rounded-xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-chugBlue shadow-inner pr-10" id="loginPassword" placeholder="••••••••" required="" type="password" value="waterhero123"><button class="absolute right-2.5 top-1/2 -translate-y-1/2 text-chugInk/60 hover:text-chugInk font-comic font-bold text-xs p-1" onclick="togglePasswordVisibility('loginPassword')" type="button">👁️</button></div></div><div class="pt-2"><button class="pop-btn w-full py-3.5 bg-chugBlue hover:bg-blue-600 text-white font-display text-xl tracking-wide rounded-xl comic-border shadow-pop uppercase flex items-center justify-center gap-2" id="loginSubmitBtn" type="submit"><span class="">LOG IN</span><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path></svg></button></div></form><div class="mt-4 pt-3 border-t-2 border-chugInk/20 text-center font-comic text-xs font-bold text-chugInk/70">Need an account? <button class="text-chugBlue underline underline-offset-2 ml-1 font-black" onclick="navigateTo('register')">SIGN UP</button></div></div></div></section><section class="hidden transition-all duration-300" id="view-forgot"><div class="w-full"><button class="mb-3 inline-flex items-center gap-1 font-comic font-black text-xs text-chugInk/70 hover:text-chugInk uppercase" onclick="navigateTo('login')"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path></svg>BACK TO LOGIN</button><div class="bg-white comic-border-thick rounded-2xl p-5 shadow-pop-lg"><div class="inline-block bg-chugYellow text-chugInk font-comic font-black text-[10px] px-2.5 py-0.5 rounded comic-border shadow-pop-sm -rotate-2 mb-2">RESET ACCESS</div><h2 class="font-display text-3xl text-chugInk uppercase leading-tight mb-1">RECOVER YOUR <span class="text-chugPink">FLOW!</span></h2><p class="text-xs font-comic font-bold text-chugInk/70 mb-4">Enter your email to receive simulated reset instructions.</p><div id="forgotStateForm"><form class="space-y-3" onsubmit="handleForgotSubmit(event)"><div><label class="block font-comic font-black text-[11px] uppercase tracking-wider text-chugInk mb-1">Email Address</label><input class="w-full px-3 py-2.5 bg-chugCream font-comic font-bold text-sm text-chugInk comic-border rounded-xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-chugBlue shadow-inner" id="forgotEmail" placeholder="alex@example.com" required="" type="email"></div><button class="pop-btn w-full py-3 bg-chugPink hover:bg-pink-600 text-white font-display text-lg tracking-wide rounded-xl comic-border shadow-pop uppercase" type="submit">SEND RESET LINK</button></form></div><div class="hidden text-center space-y-3 py-2" id="forgotSuccessState"><div class="w-12 h-12 bg-emerald-100 text-emerald-600 comic-border rounded-full flex items-center justify-center mx-auto text-2xl shadow-pop-sm">✓</div><h3 class="font-display text-xl uppercase text-chugInk">LINK TRANSMITTED!</h3><p class="text-xs font-comic font-bold text-chugInk/75">Reset instructions dispatched for <span class="font-black text-chugBlue" id="sentEmailPlaceholder">your email</span>.</p><button class="pop-btn px-4 py-2 bg-chugYellow comic-border rounded-lg font-comic font-black text-xs uppercase shadow-pop-sm" onclick="navigateTo('login')">BACK TO LOGIN</button></div></div></div></section><section class="transition-all duration-300 hidden" id="view-onboarding"><div class="w-full space-y-4"><div class="bg-white comic-border-thick rounded-2xl p-3.5 shadow-pop"><div class="flex items-center justify-between gap-2 mb-1.5"><div><span class="font-comic font-black text-[10px] uppercase tracking-wider text-chugBlue">ONBOARDING MISSION</span><h2 class="font-display text-xl sm:text-2xl uppercase text-chugInk leading-tight" id="stepIndicatorTitle">STEP 4 OF 5: LET'S SET YOUR FLOW!</h2></div><span class="font-display text-xl text-chugPink" id="stepPercentage">80%</span></div><div class="w-full bg-chugCream h-4 comic-border rounded-full overflow-hidden p-0.5"><div class="bg-gradient-to-r from-chugCyan via-chugYellow to-chugPink h-full rounded-full transition-all duration-500 border-r-2 border-chugInk" id="progressBarFill" style="width: 80%;"></div></div><div class="flex justify-between items-center mt-2 pt-1.5 border-t-2 border-chugInk/15 text-[10px] font-comic font-black text-chugInk/60"><button class="hover:text-chugBlue transition-colors flex items-center gap-1" onclick="goToOnboardingStep(1)"><span class="w-4 h-4 rounded-full comic-border flex items-center justify-center text-[9px] bg-chugYellow">1</span> About</button><button class="hover:text-chugBlue transition-colors flex items-center gap-1" onclick="goToOnboardingStep(2)"><span class="w-4 h-4 rounded-full comic-border flex items-center justify-center text-[9px]">2</span> Routine</button><button class="hover:text-chugBlue transition-colors flex items-center gap-1" onclick="goToOnboardingStep(3)"><span class="w-4 h-4 rounded-full comic-border flex items-center justify-center text-[9px]">3</span> Acts</button><button class="hover:text-chugBlue transition-colors flex items-center gap-1" onclick="goToOnboardingStep(4)"><span class="w-4 h-4 rounded-full comic-border flex items-center justify-center text-[9px]">4</span> Goals</button><button class="hover:text-chugBlue transition-colors flex items-center gap-1" onclick="goToOnboardingStep(5)"><span class="w-4 h-4 rounded-full comic-border flex items-center justify-center text-[9px]">5</span> Plan</button></div></div><div class="bg-white comic-border-thick rounded-2xl p-4 sm:p-5 shadow-pop-lg relative"><div class="onboarding-step block space-y-4 hidden" id="step-1"><div class="border-b-2 border-chugInk pb-2.5"><div class="inline-block bg-chugYellow text-chugInk font-comic font-black text-[10px] px-2 py-0.5 rounded comic-border shadow-pop-sm -rotate-1 mb-1">PROFILE IDENTITY</div><h3 class="font-display text-2xl uppercase text-chugInk">WHO'S THE THIRST BOSS?</h3><p class="font-comic font-bold text-xs text-chugInk/70">Calibrate your daily cadence. No clinical claims — pure smart nudging.</p></div><div class="space-y-3"><div><label class="block font-comic font-black text-[11px] uppercase tracking-wider text-chugInk mb-1">Superhero Name / Handle <span class="text-chugRed">*</span></label><input class="w-full px-3 py-2.5 bg-chugCream font-comic font-bold text-sm text-chugInk comic-border rounded-xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-chugBlue shadow-inner" id="obName" placeholder="e.g. Alex Rivera" type="text" value="Alex Rivera"></div><div class="grid grid-cols-2 gap-2.5"><div><label class="block font-comic font-black text-[11px] uppercase tracking-wider text-chugInk mb-1">Age (Years)</label><input class="w-full px-3 py-2 bg-chugCream font-comic font-bold text-sm text-chugInk comic-border rounded-xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-chugBlue shadow-inner" id="obAge" max="110" min="10" placeholder="28" type="number" value="28"></div><div><label class="block font-comic font-black text-[11px] uppercase tracking-wider text-chugInk mb-1">Weight (KG)</label><input class="w-full px-3 py-2 bg-chugCream font-comic font-bold text-sm text-chugInk comic-border rounded-xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-chugBlue shadow-inner" id="obWeight" max="250" min="30" placeholder="72" type="number" value="72"></div></div></div><div><label class="block font-comic font-black text-[11px] uppercase tracking-wider text-chugInk mb-1.5">Preferred Unit</label><div class="grid grid-cols-2 gap-2"><button class="unit-btn py-2.5 px-2 comic-border rounded-xl font-display text-base tracking-wider text-center bg-chugBlue text-white shadow-pop" id="unit-ml" onclick="selectUnit('ml')" type="button">MILLILITRES (ML)</button><button class="unit-btn py-2.5 px-2 bg-chugCream text-chugInk comic-border rounded-xl font-display text-base tracking-wider text-center hover:bg-white" id="unit-fl_oz" onclick="selectUnit('fl_oz')" type="button">OUNCES (FL OZ)</button></div></div><div><label class="block font-comic font-black text-[11px] uppercase tracking-wider text-chugInk mb-1.5">Daily Activity Level</label><div class="grid grid-cols-1 gap-2"><div class="activity-card cursor-pointer bg-chugCream comic-border p-2.5 rounded-xl hover:bg-white transition-all" id="act-mostly_sitting" onclick="selectActivityLevel('mostly_sitting')"><div class="flex items-center gap-2.5"><span class="text-xl">🛋️</span><div><p class="font-display text-base text-chugInk uppercase leading-tight">MOSTLY SITTING</p><p class="font-body text-[11px] text-chugInk/70 font-semibold">Desk work, study, relaxed day</p></div></div></div><div class="activity-card cursor-pointer bg-chugCream comic-border p-2.5 rounded-xl hover:bg-white transition-all" id="act-lightly_active" onclick="selectActivityLevel('lightly_active')"><div class="flex items-center gap-2.5"><span class="text-xl">🚶</span><div><p class="font-display text-base text-chugInk uppercase leading-tight">LIGHTLY ACTIVE</p><p class="font-body text-[11px] text-chugInk/70 font-semibold">Casual walks, daily errands</p></div></div></div><div class="activity-card cursor-pointer comic-border p-2.5 rounded-xl transition-all bg-chugYellow shadow-pop" id="act-moderately_active" onclick="selectActivityLevel('moderately_active')"><div class="flex items-center gap-2.5"><span class="text-xl">🏃</span><div><p class="font-display text-base text-chugInk uppercase leading-tight">MODERATELY ACTIVE</p><p class="font-body text-[11px] text-chugInk/70 font-semibold">Regular gym, sports, jogging</p></div></div></div><div class="activity-card cursor-pointer bg-chugCream comic-border p-2.5 rounded-xl hover:bg-white transition-all" id="act-very_active" onclick="selectActivityLevel('very_active')"><div class="flex items-center gap-2.5"><span class="text-xl">⚡</span><div><p class="font-display text-base text-chugInk uppercase leading-tight">VERY ACTIVE</p><p class="font-body text-[11px] text-chugInk/70 font-semibold">Endurance training &amp; sports</p></div></div></div></div></div></div><div class="onboarding-step space-y-4 hidden" id="step-2"><div class="border-b-2 border-chugInk pb-2.5"><div class="inline-block bg-chugCyan text-chugInk font-comic font-black text-[10px] px-2 py-0.5 rounded comic-border shadow-pop-sm -rotate-1 mb-1">CHRONO CADENCE</div><h3 class="font-display text-2xl uppercase text-chugInk">WHEN DOES YOUR DAY START?</h3><p class="font-comic font-bold text-xs text-chugInk/70">Sleep guard auto-mutes notifications while resting.</p></div><div class="flex gap-2"><button class="flex-1 py-2 px-2 text-chugInk comic-border rounded-lg font-comic text-[11px] font-black bg-chugYellow shadow-pop-sm" id="sched-same" onclick="setScheduleType('same')" type="button">SAME SCHEDULE</button><button class="flex-1 py-2 px-2 text-chugInk comic-border rounded-lg font-comic text-[11px] font-black hover:bg-chugCream bg-white" id="sched-split" onclick="setScheduleType('split')" type="button">SPLIT WEEKEND</button></div><div class="grid grid-cols-2 gap-2.5"><div class="bg-chugCream comic-border p-2.5 rounded-xl"><label class="block font-comic font-black text-[10px] uppercase text-chugInk mb-1">☀️ WAKE-UP</label><input class="w-full px-2 py-1.5 bg-white font-comic font-black text-sm text-chugInk comic-border rounded-lg focus:outline-none" id="obWakeTime" onchange="renderTimeline()" type="time" value="07:00"></div><div class="bg-chugCream comic-border p-2.5 rounded-xl"><label class="block font-comic font-black text-[10px] uppercase text-chugInk mb-1">🌙 BEDTIME</label><input class="w-full px-2 py-1.5 bg-white font-comic font-black text-sm text-chugInk comic-border rounded-lg focus:outline-none" id="obBedTime" onchange="renderTimeline()" type="time" value="22:30"></div><div class="bg-white comic-border p-2.5 rounded-xl"><label class="block font-comic font-black text-[10px] uppercase text-chugInk mb-1">⏱️ 1ST ALERT</label><input class="w-full px-2 py-1.5 bg-chugCream font-comic font-black text-sm text-chugInk comic-border rounded-lg focus:outline-none" id="obFirstAlert" type="time" value="07:30"></div><div class="bg-white comic-border p-2.5 rounded-xl"><label class="block font-comic font-black text-[10px] uppercase text-chugInk mb-1">⏱️ LAST ALERT</label><input class="w-full px-2 py-1.5 bg-chugCream font-comic font-black text-sm text-chugInk comic-border rounded-lg focus:outline-none" id="obLastAlert" type="time" value="21:45"></div></div><div class="bg-chugInk text-white p-3 rounded-xl comic-border"><div class="flex items-center justify-between text-[11px] font-comic font-bold mb-1.5"><span class="text-chugYellow">FLOW PREVIEW</span><span class="text-chugCyan" id="activeHoursSpan">15.5 WAKING HOURS</span></div><div class="w-full h-7 bg-chugInk/80 border-2 border-white/40 rounded-lg flex overflow-hidden relative" id="timelineBar">
+<div class="bg-chugBlue/70 h-full flex items-center justify-center text-[10px] font-bold border-r border-white/20" style="width: 29.166666666666668%">SLEEP</div>
+<div class="bg-chugCyan h-full flex items-center justify-center text-[10px] font-black text-chugInk border-r border-white/20" style="width: 64.58333333333334%">HYDRATION ACTIVE (07:00 - 22:30)</div>
+<div class="bg-chugBlue/70 h-full flex items-center justify-center text-[10px] font-bold" style="width: 6.249999999999986%">SLEEP</div>
+</div><p class="text-[10px] font-body text-white/70 mt-1.5">⚡ Smart alerts pause during sleep guard automatically.</p></div></div><div class="onboarding-step space-y-4 hidden" id="step-3"><div class="flex items-center justify-between gap-2 border-b-2 border-chugInk pb-2.5"><div><div class="inline-block bg-chugPink text-white font-comic font-black text-[10px] px-2 py-0.5 rounded comic-border shadow-pop-sm -rotate-1 mb-1">SESSIONS &amp; ROUTINES</div><h3 class="font-display text-2xl uppercase text-chugInk">WHAT'S ON YOUR LIST?</h3></div><button class="pop-btn py-2 px-3 bg-chugYellow hover:bg-yellow-300 text-chugInk comic-border rounded-xl font-display text-sm tracking-wide shadow-pop uppercase" onclick="openActivityModal()" type="button">+ ADD</button></div><div class="space-y-2.5" id="activitiesList">
+<div class="bg-white comic-border p-4 rounded-xl shadow-pop-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<span class="text-3xl">🏃</span>
+<div>
+<div class="flex items-center gap-2">
+<h4 class="font-display text-lg uppercase text-chugInk">Morning Trail Run</h4>
+<span class="bg-chugYellow px-2 py-0.5 rounded text-[10px] font-black comic-border">Running</span>
+</div>
+<p class="text-xs font-comic font-bold text-chugInk/70">
+                  07:30 – 08:30 • Days: Mon, Wed, Fri
+                </p>
+<div class="flex gap-2 text-[10px] font-black text-chugBlue mt-0.5">
+<span class="">⏸️ Reminders Paused</span>
+<span class="">⚡ Immediate Hydration Primer</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 self-end sm:self-auto">
+<button class="px-3 py-1.5 bg-chugCream hover:bg-yellow-100 text-chugInk comic-border rounded-lg font-comic font-black text-xs" onclick="editActivity('act-1')" type="button">
+                EDIT
+              </button>
+<button class="px-3 py-1.5 bg-white hover:bg-rose-50 text-chugRed comic-border rounded-lg font-comic font-black text-xs" onclick="deleteActivity('act-1')" type="button">
+                DELETE
+              </button>
+</div>
+</div>
+<div class="bg-white comic-border p-4 rounded-xl shadow-pop-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<span class="text-3xl">🏋️</span>
+<div>
+<div class="flex items-center gap-2">
+<h4 class="font-display text-lg uppercase text-chugInk">Gym Strength Protocol</h4>
+<span class="bg-chugYellow px-2 py-0.5 rounded text-[10px] font-black comic-border">Gym</span>
+</div>
+<p class="text-xs font-comic font-bold text-chugInk/70">
+                  17:30 – 18:45 • Days: Tue, Thu
+                </p>
+<div class="flex gap-2 text-[10px] font-black text-chugBlue mt-0.5">
+<span class="">⏸️ Reminders Paused</span>
+<span class="">⚡ Immediate Hydration Primer</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 self-end sm:self-auto">
+<button class="px-3 py-1.5 bg-chugCream hover:bg-yellow-100 text-chugInk comic-border rounded-lg font-comic font-black text-xs" onclick="editActivity('act-2')" type="button">
+                EDIT
+              </button>
+<button class="px-3 py-1.5 bg-white hover:bg-rose-50 text-chugRed comic-border rounded-lg font-comic font-black text-xs" onclick="deleteActivity('act-2')" type="button">
+                DELETE
+              </button>
+</div>
+</div>
+</div><p class="text-[11px] font-comic font-bold text-chugInk/60 text-center">💡 Add sessions to automatically pause or boost alerts.</p></div><div class="onboarding-step space-y-4" id="step-4"><div class="border-b-2 border-chugInk pb-2.5"><div class="inline-block bg-chugYellow text-chugInk font-comic font-black text-[10px] px-2 py-0.5 rounded comic-border shadow-pop-sm -rotate-1 mb-1">INTAKE TARGETS</div><h3 class="font-display text-2xl uppercase text-chugInk">LET'S SET YOUR FLOW!</h3><p class="font-comic font-bold text-xs text-chugInk/70">Daily goal and frequency parameters.</p></div><div class="bg-chugCream comic-border p-3.5 rounded-xl"><label class="block font-comic font-black text-[11px] uppercase tracking-wider text-chugInk mb-1.5">🎯 DAILY WATER GOAL</label><div class="flex items-center gap-2"><input class="w-28 px-3 py-2 bg-white font-display text-2xl text-chugInk comic-border rounded-xl focus:outline-none focus:ring-2 focus:ring-chugBlue" id="obGoalMl" max="6000" min="500" step="50" type="number" value="2500"><span class="font-display text-lg text-chugBlue uppercase flex-1" id="goalUnitLabel">ML / DAY</span><div class="flex gap-1"><button class="w-9 h-9 bg-white comic-border rounded-lg font-comic font-black text-lg hover:bg-rose-50" onclick="adjustGoal(-250)" type="button">-</button><button class="w-9 h-9 bg-white comic-border rounded-lg font-comic font-black text-lg hover:bg-emerald-50" onclick="adjustGoal(250)" type="button">+</button></div></div></div><div><label class="block font-comic font-black text-[11px] uppercase tracking-wider text-chugInk mb-1.5">⏱️ REMINDER FREQUENCY</label><div class="grid grid-cols-3 gap-2"><button class="interval-btn py-2.5 px-1 bg-white text-chugInk comic-border rounded-xl font-display text-base text-center" id="int-30" onclick="selectInterval(30)" type="button">30 MIN</button><button class="interval-btn py-2.5 px-1 bg-white text-chugInk comic-border rounded-xl font-display text-base text-center" id="int-45" onclick="selectInterval(45)" type="button">45 MIN</button><button class="interval-btn py-2.5 px-1 comic-border rounded-xl font-display text-base text-center bg-chugBlue text-white shadow-pop" id="int-60" onclick="selectInterval(60)" type="button">60 MIN</button><button class="interval-btn py-2.5 px-1 bg-white text-chugInk comic-border rounded-xl font-display text-base text-center" id="int-90" onclick="selectInterval(90)" type="button">90 MIN</button><button class="interval-btn py-2.5 px-1 bg-white text-chugInk comic-border rounded-xl font-display text-base text-center" id="int-120" onclick="selectInterval(120)" type="button">120 MIN</button></div></div><div><label class="block font-comic font-black text-[11px] uppercase tracking-wider text-chugInk mb-1.5">💬 REMINDER VIBE</label><div class="grid grid-cols-3 gap-2"><div class="style-card cursor-pointer bg-white comic-border p-2 rounded-xl text-center" id="style-gentle" onclick="selectStyle('gentle')"><p class="font-display text-base text-chugInk">GENTLE</p><p class="text-[9px] font-body text-chugInk/70 font-bold">Soft</p></div><div class="style-card cursor-pointer comic-border p-2 rounded-xl text-center bg-chugYellow shadow-pop" id="style-balanced" onclick="selectStyle('balanced')"><p class="font-display text-base text-chugInk">BALANCED</p><p class="text-[9px] font-body text-chugInk/70 font-bold">Comic</p></div><div class="style-card cursor-pointer bg-white comic-border p-2 rounded-xl text-center" id="style-frequent" onclick="selectStyle('frequent')"><p class="font-display text-base text-chugInk">FREQUENT</p><p class="text-[9px] font-body text-chugInk/70 font-bold">Hero</p></div></div></div><div class="space-y-2.5 pt-1"><div class="flex items-center justify-between p-2.5 bg-chugCream comic-border rounded-xl"><div><p class="font-comic font-black text-xs text-chugInk uppercase">ENABLE NOTIFICATIONS</p><p class="text-[10px] font-body text-chugInk/70">Browser alerts during day</p></div><label class="relative inline-flex items-center cursor-pointer"><input checked="" class="sr-only peer" id="obRemindersEnabled" type="checkbox"><div class="w-10 h-6 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-chugBlue comic-border"></div></label></div><div class="flex items-center justify-between p-2.5 bg-chugCream comic-border rounded-xl"><div><p class="font-comic font-black text-xs text-chugInk uppercase">PAUSE AFTER GOAL MET</p><p class="text-[10px] font-body text-chugInk/70">Celebrate without spam</p></div><label class="relative inline-flex items-center cursor-pointer"><input checked="" class="sr-only peer" id="obPauseOnGoal" type="checkbox"><div class="w-10 h-6 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-chugBlue comic-border"></div></label></div></div></div><div class="onboarding-step hidden space-y-4" id="step-5"><div class="border-b-2 border-chugInk pb-2.5"><div class="inline-block bg-chugPink text-white font-comic font-black text-[10px] px-2 py-0.5 rounded comic-border shadow-pop-sm -rotate-1 mb-1">FINAL BRIEFING</div><h3 class="font-display text-2xl uppercase text-chugInk">YOUR GAME PLAN</h3><p class="font-comic font-bold text-xs text-chugInk/70">Review your settings before launch.</p></div><div class="space-y-2.5"><div class="bg-chugCream comic-border p-3 rounded-xl relative"><button class="absolute top-2.5 right-2.5 text-[9px] font-black text-chugBlue hover:underline uppercase font-comic" onclick="goToOnboardingStep(1)" type="button">[ EDIT ]</button><p class="font-comic font-black text-[10px] text-chugInk/60 uppercase">IDENTITY</p><p class="font-display text-xl text-chugBlue uppercase leading-tight" id="sumName">Alex Rivera</p><p class="text-xs font-bold text-chugInk/80 font-comic" id="sumStats">Age 28 • 72 kg • Moderately Active</p><p class="text-[10px] font-bold text-chugInk/60 font-comic" id="sumUnit">Units: Millilitres (ml)</p></div><div class="bg-chugCream comic-border p-3 rounded-xl relative"><button class="absolute top-2.5 right-2.5 text-[9px] font-black text-chugBlue hover:underline uppercase font-comic" onclick="goToOnboardingStep(4)" type="button">[ EDIT ]</button><p class="font-comic font-black text-[10px] text-chugInk/60 uppercase">TARGET &amp; CADENCE</p><p class="font-display text-xl text-chugPink uppercase leading-tight" id="sumGoal">2,500 ML / DAY</p><p class="text-xs font-bold text-chugInk/80 font-comic" id="sumInterval">Every 60 Minutes • Balanced</p></div><div class="bg-chugCream comic-border p-3 rounded-xl relative"><button class="absolute top-2.5 right-2.5 text-[9px] font-black text-chugBlue hover:underline uppercase font-comic" onclick="goToOnboardingStep(2)" type="button">[ EDIT ]</button><p class="font-comic font-black text-[10px] text-chugInk/60 uppercase">CHRONO ROUTINE</p><p class="font-display text-lg text-chugInk uppercase leading-tight" id="sumRoutine">07:00 AM – 10:30 PM</p><p class="text-xs font-bold text-chugInk/80 font-comic" id="sumAlerts">First: 07:30 • Last: 21:45</p></div><div class="bg-chugCream comic-border p-3 rounded-xl relative"><button class="absolute top-2.5 right-2.5 text-[9px] font-black text-chugBlue hover:underline uppercase font-comic" onclick="goToOnboardingStep(3)" type="button">[ EDIT ]</button><p class="font-comic font-black text-[10px] text-chugInk/60 uppercase">SCHEDULED ACTIVITIES</p><p class="font-display text-lg text-chugInk uppercase leading-tight" id="sumActivitiesCount">2 Sessions</p><p class="text-xs font-bold text-chugInk/80 font-comic truncate" id="sumActivitiesList">Morning Run, Gym</p></div></div><div class="bg-chugYellow comic-border p-3 rounded-xl"><p class="font-display text-base text-chugInk uppercase mb-1">SAMPLE REMINDER TIMELINE</p><div class="flex flex-wrap gap-1.5 pt-1" id="sampleTimelinePills"></div></div><div class="bg-white comic-border p-3 rounded-xl flex items-center gap-3"><img alt="Mascot Mini" class="w-11 h-11 object-cover rounded-lg comic-border flex-shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1WdXx0gNN27FFqh1_U284EkOV7xkWOSTuPKrjLIIySA3_uziKHcFxts38qKpWxypR3FFrj31cyewc0171JqggQw5sJxerpazIGARSOFmbL_4YL8MOkMdTO3UDkPWzQCZP2BoMnWXJlONwXSSmbvoZLReN-yvFH4wATZ_ANJ5v_PEmbYVVkygZIs-agrFpX1DFellyo9-qex8yrx3wbWFbP5bSP3kRo_rhg1avzIVI2MCILd9RE-heLZ6K53"><p class="font-body text-xs text-chugInk/80 font-semibold">Ready to launch your custom dashboard profile!</p></div></div><div class="pt-4 mt-4 border-t-2 border-chugInk flex items-center justify-between gap-2"><button class="pop-btn py-2.5 px-4 bg-white text-chugInk font-display text-base tracking-wider rounded-xl comic-border shadow-pop uppercase" id="obBackBtn" onclick="prevOnboardingStep()" type="button">← BACK</button><button class="pop-btn py-2.5 px-5 bg-chugYellow hover:bg-yellow-300 text-chugInk font-display text-base tracking-wider rounded-xl comic-border shadow-pop uppercase flex items-center gap-1.5" id="obNextBtn" onclick="nextOnboardingStep()" type="button"><span class="" id="nextBtnText">CONTINUE</span><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path></svg></button></div></div></div></section><section class="transition-all duration-300" id="view-dashboard"><div class="w-full space-y-4"><div class="hidden bg-emerald-400 text-chugInk comic-border-thick p-3 rounded-2xl shadow-pop flex items-center justify-between" id="finishNotice"><div class="flex items-center gap-2"><span class="text-2xl">🎉</span><div><p class="font-display text-base uppercase">ONBOARDING COMPLETE!</p><p class="font-comic font-bold text-[11px]">Saved in localStorage.</p></div></div><button class="font-black text-sm px-2" onclick="document.getElementById('finishNotice').classList.add('hidden')">✕</button></div><div class="bg-chugBlue text-white comic-border-thick rounded-3xl p-5 shadow-pop-lg relative overflow-hidden"><div class="relative z-10 space-y-3"><div class="flex justify-between items-start"><div class="inline-flex items-center gap-1.5 bg-chugYellow text-chugInk px-2.5 py-0.5 rounded-full comic-border shadow-pop-sm font-comic font-black text-[10px] uppercase">⚡ MAIN CHARACTER ENERGY</div><span class="font-comic font-bold text-xs text-white/90" id="dashHeroGoal">Target: 3,000 ML</span></div><h2 class="font-display text-3xl uppercase leading-tight">LEVEL UP YOUR DRIP, <span class="text-chugYellow" id="dashHeroName">GUEST HERO</span>!</h2><div class="bg-white text-chugInk comic-border p-3 rounded-2xl shadow-pop text-center"><p class="text-[9px] font-black uppercase text-chugInk/60 font-comic">TODAY'S INTAKE</p><p class="font-display text-3xl text-chugBlue my-0.5" id="dashIntake">850 <span class="text-xl">ML</span></p><div class="w-full bg-chugCream h-2.5 comic-border rounded-full overflow-hidden"><div class="bg-chugPink h-full" id="dashProgressBar" style="width: 28%;"></div></div><p class="text-[9px] font-bold text-chugInk/70 font-comic mt-0.5">34% OF DAILY QUOTA • OFFICIALLY ENTERING YOUR HYDRATED ERA</p></div><div class="bg-chugYellow text-chugInk comic-border p-2 rounded-xl text-center shadow-pop-sm mt-2"><p class="font-comic font-black text-xs uppercase tracking-tight">💬 "Time to lock in. Down 500ml before your next task!"</p></div></div><div class="mt-4 pt-4 border-t-2 border-white/30 grid grid-cols-2 gap-2 relative z-10"><button class="pop-btn py-2 bg-chugCyan text-chugInk comic-border rounded-xl font-display text-base tracking-wide uppercase shadow-pop text-center leading-tight" onclick="logWater(150)">+150 ML <span class="block text-[9px] font-comic font-bold">CUP</span></button><button class="pop-btn py-2 bg-chugYellow text-chugInk comic-border rounded-xl font-display text-base tracking-wide uppercase shadow-pop text-center leading-tight" onclick="logWater(250)">+250 ML <span class="block text-[9px] font-comic font-bold">GLASS</span></button><button class="pop-btn py-2 bg-chugPink text-white comic-border rounded-xl font-display text-base tracking-wide uppercase shadow-pop text-center leading-tight" onclick="logWater(350)">+350 ML <span class="block text-[9px] font-comic font-bold">MUG</span></button><button class="pop-btn py-2 bg-white text-chugInk comic-border rounded-xl font-display text-base tracking-wide uppercase shadow-pop text-center leading-tight" onclick="logWater(500)">+500 ML <span class="block text-[9px] font-comic font-bold">BOTTLE</span></button><div class="bg-chugYellow text-chugInk comic-border p-2 rounded-xl text-center shadow-pop-sm mt-2"><p class="font-comic font-black text-xs uppercase tracking-tight">💬 "Time to lock in. Down 500ml before your next task!"</p></div></div><div class="mt-3 pt-3 border-t-2 border-white/30 grid grid-cols-2 gap-2 text-center text-chugInk font-comic font-black text-[10px]"><div class="bg-white comic-border py-1 px-2 rounded-lg shadow-pop-sm uppercase flex items-center justify-center gap-1"><span class="">🔥</span> NO CAP • VALID SIP</div><div class="bg-chugPink text-white comic-border py-1 px-2 rounded-lg shadow-pop-sm uppercase flex items-center justify-center gap-1"><span class="">👀</span> ICED LATTE ≠ WATER (DELULU)</div></div></div><div class="space-y-3"><div class="bg-white comic-border-thick p-4 rounded-2xl shadow-pop"><div class="flex items-center justify-between mb-2 border-b-2 border-chugInk pb-1.5"><h3 class="font-display text-base uppercase text-chugInk">NEXT SMART NUDGE</h3><span class="bg-chugYellow comic-border px-2 py-0.5 rounded text-[9px] font-comic font-black">IN 45 MINS</span></div><p class="font-comic font-black text-xs text-chugBlue" id="dashNextAlertTime">3:45 PM • Interval: 60 Mins</p><p class="text-[11px] font-body text-chugInk/70 mt-0.5">Sleep guard active at <span class="font-bold text-chugInk" id="dashBedtimeSpan">22:30</span>. Hourly vibe check: grab your bottle and drink up! That afternoon headache living rent free? Fix it with H2O.</p></div><div class="bg-white comic-border-thick p-4 rounded-2xl shadow-pop"><div class="flex items-center justify-between mb-2 border-b-2 border-chugInk pb-1.5"><h3 class="font-display text-base uppercase text-chugInk">ACTIVITIES</h3><button class="text-[10px] font-black text-chugBlue hover:underline uppercase font-comic" onclick="navigateTo('onboarding'); goToOnboardingStep(3);">MANAGE</button></div><div class="space-y-1 text-xs font-comic font-bold text-chugInk/80" id="dashActivitiesPreview">
+<div class="flex items-center justify-between py-1 border-b border-chugInk/10">
+<span class="">⚡ Morning Trail Run</span>
+<span class="text-chugBlue">07:30 – 08:30</span>
+</div>
+<div class="flex items-center justify-between py-1 border-b border-chugInk/10">
+<span class="">⚡ Gym Strength Protocol</span>
+<span class="text-chugBlue">17:30 – 18:45</span>
+</div>
+</div></div></div><div class="text-center pt-1"><button class="pop-btn w-full py-3 px-4 bg-white hover:bg-chugCream text-chugInk comic-border rounded-xl font-comic font-extrabold text-xs uppercase shadow-pop" onclick="navigateTo('onboarding')">⚡ LOCK IN NOW • ENTER HYDRATED ERA</button></div></div></section></main>
+<!-- ========================================== -->
+<!-- MODAL: ADD / EDIT ACTIVITY                 -->
+<!-- ========================================== -->
+<div class="hidden fixed inset-0 z-50 bg-chugInk/60 backdrop-blur-sm flex items-center justify-center p-4" id="activityModal">
+<div class="bg-white comic-border-thick rounded-2xl p-6 max-w-lg w-full shadow-pop-lg relative animate-fade-in">
+<div class="flex items-center justify-between border-b-2 border-chugInk pb-3 mb-4">
+<div>
+<span class="font-comic font-black text-xs text-chugPink uppercase">SCHEDULE SLOT</span>
+<h4 class="font-display text-2xl uppercase text-chugInk" id="actModalTitle">ADD ACTIVITY</h4>
+</div>
+<button class="w-8 h-8 comic-border rounded-lg bg-chugCream font-comic font-black hover:bg-rose-100 flex items-center justify-center" onclick="closeActivityModal()">
+          ✕
+        </button>
+</div>
+<form class="space-y-4" id="activityForm" onsubmit="handleSaveActivity(event)">
+<input id="actEditId" type="hidden" value="">
+<!-- Activity Preset Selection -->
+<div>
+<label class="block font-comic font-black text-xs uppercase tracking-wider text-chugInk mb-1">
+            Activity Type
+          </label>
+<select class="w-full px-3 py-2.5 bg-chugCream font-comic font-bold text-sm text-chugInk comic-border rounded-xl" id="actTypeSelect" onchange="handleActivityTypeChange()">
+<option value="Gym">Gym / Workout 🏋️</option>
+<option value="Running">Running / Cardio 🏃</option>
+<option value="Work">Office / Deep Work 💻</option>
+<option value="College">College / School 🎓</option>
+<option value="Study">Study Session 📚</option>
+<option value="Sports">Team Sports ⚽</option>
+<option value="Nap">Power Nap 💤</option>
+<option value="Outdoor">Outdoor Activity 🌲</option>
+<option value="Custom">Custom Activity ✨</option>
+</select>
+</div>
+<!-- Custom Name Input (shown if Custom selected) -->
+<div class="hidden" id="customNameRow">
+<label class="block font-comic font-black text-xs uppercase tracking-wider text-chugInk mb-1">
+            Custom Activity Name
+          </label>
+<input class="w-full px-3 py-2 bg-white font-comic font-bold text-sm text-chugInk comic-border rounded-xl" id="actCustomName" placeholder="e.g. Martial Arts or Yoga" type="text">
+</div>
+<!-- Time Range -->
+<div class="grid grid-cols-2 gap-3">
+<div>
+<label class="block font-comic font-black text-xs uppercase tracking-wider text-chugInk mb-1">
+              Start Time
+            </label>
+<input class="w-full px-3 py-2 bg-chugCream font-comic font-bold text-sm text-chugInk comic-border rounded-xl" id="actStartTime" required="" type="time" value="17:30">
+</div>
+<div>
+<label class="block font-comic font-black text-xs uppercase tracking-wider text-chugInk mb-1">
+              End Time
+            </label>
+<input class="w-full px-3 py-2 bg-chugCream font-comic font-bold text-sm text-chugInk comic-border rounded-xl" id="actEndTime" required="" type="time" value="18:45">
+</div>
+</div>
+<!-- Days of Week Selector -->
+<div>
+<label class="block font-comic font-black text-xs uppercase tracking-wider text-chugInk mb-1.5">
+            Repeat Days
+          </label>
+<div class="flex gap-1.5 justify-between">
+<button class="day-btn w-9 h-9 font-comic font-bold text-xs comic-border rounded bg-chugYellow shadow-pop-sm" onclick="toggleDay(this, 'Mon')" type="button">M</button>
+<button class="day-btn w-9 h-9 font-comic font-bold text-xs comic-border rounded bg-chugYellow shadow-pop-sm" onclick="toggleDay(this, 'Tue')" type="button">T</button>
+<button class="day-btn w-9 h-9 font-comic font-bold text-xs comic-border rounded bg-chugYellow shadow-pop-sm" onclick="toggleDay(this, 'Wed')" type="button">W</button>
+<button class="day-btn w-9 h-9 font-comic font-bold text-xs comic-border rounded bg-chugYellow shadow-pop-sm" onclick="toggleDay(this, 'Thu')" type="button">T</button>
+<button class="day-btn w-9 h-9 font-comic font-bold text-xs comic-border rounded bg-chugYellow shadow-pop-sm" onclick="toggleDay(this, 'Fri')" type="button">F</button>
+<button class="day-btn w-9 h-9 font-comic font-bold text-xs comic-border rounded bg-white" onclick="toggleDay(this, 'Sat')" type="button">S</button>
+<button class="day-btn w-9 h-9 font-comic font-bold text-xs comic-border rounded bg-white" onclick="toggleDay(this, 'Sun')" type="button">S</button>
+</div>
+</div>
+<!-- Toggles -->
+<div class="space-y-2 pt-1 border-t border-chugInk/20">
+<label class="flex items-center gap-2 cursor-pointer font-comic text-xs font-bold text-chugInk">
+<input checked="" class="w-4 h-4 rounded text-chugBlue border-2 border-chugInk" id="actPauseReminders" type="checkbox">
+<span class="">Pause regular reminders during this session</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer font-comic text-xs font-bold text-chugInk">
+<input checked="" class="w-4 h-4 rounded text-chugBlue border-2 border-chugInk" id="actResumeAfter" type="checkbox">
+<span class="">Send hydration reminder immediately when session finishes</span>
+</label>
+</div>
+<!-- Actions -->
+<div class="pt-3 flex gap-2">
+<button class="flex-1 py-2.5 bg-white comic-border rounded-xl font-comic font-black text-xs uppercase hover:bg-chugCream" onclick="closeActivityModal()" type="button">
+            CANCEL
+          </button>
+<button class="flex-1 py-2.5 bg-chugBlue text-white comic-border rounded-xl font-display text-lg uppercase tracking-wider shadow-pop hover:bg-blue-600" type="submit">
+            SAVE SESSION
+          </button>
+</div>
+</form>
+</div>
+</div>
+<!-- APPLICATION JAVASCRIPT STATE ENGINE -->
+<script>
+    // ------------------------------------------------------------------------
+    // DATA MODEL & LOCAL STORAGE MANAGEMENT (Frontend Only Demo)
+    // ------------------------------------------------------------------------
+    const STORAGE_KEY = 'CHUG_APP_STATE_V1';
+
+    const defaultState = {
+      currentStep: 1,
+      completed: false,
+      userProfile: {
+        displayName: 'Alex Rivera',
+        email: 'alex@example.com',
+        age: 28,
+        weightKg: 72,
+        activityLevel: 'moderately_active',
+        preferredUnit: 'ml'
+      },
+      dailySchedule: {
+        wakeUpTime: '07:00',
+        bedtime: '22:30',
+        firstReminderTime: '07:30',
+        lastReminderTime: '21:45',
+        differentWeekendSchedule: false,
+      },
+      activities: [
+        {
+          id: 'act-1',
+          type: 'Running',
+          customName: 'Morning Trail Run',
+          startTime: '07:30',
+          endTime: '08:30',
+          daysOfWeek: ['Mon', 'Wed', 'Fri'],
+          pauseReminders: true,
+          resumeAfterActivity: true
+        },
+        {
+          id: 'act-2',
+          type: 'Gym',
+          customName: 'Gym Strength Protocol',
+          startTime: '17:30',
+          endTime: '18:45',
+          daysOfWeek: ['Tue', 'Thu'],
+          pauseReminders: true,
+          resumeAfterActivity: true
+        }
+      ],
+      hydrationPreferences: {
+        dailyGoalMl: 2500,
+        reminderIntervalMinutes: 60,
+        remindersEnabled: true,
+        quietHours: '22:30 - 07:00',
+        reminderStyle: 'balanced',
+        pauseWhenGoalReached: true
+      },
+      todayIntakeMl: 850
+    };
+
+    let appState = loadState();
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          return { ...defaultState, ...parsed };
+        }
+      } catch (err) {
+        console.warn('Could not parse localStorage, falling back to defaults', err);
+      }
+      return { ...defaultState };
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+        updateHeaderUserBadge();
+      } catch (err) {
+        console.error('Failed to save state to localStorage', err);
+      }
+    }
+
+    function resetDemoData() {
+      if (confirm('Reset demo onboarding and clear local progress?')) {
+        localStorage.removeItem(STORAGE_KEY);
+        appState = { ...defaultState, completed: false, currentStep: 1 };
+        saveState();
+        syncFormWithState();
+        navigateTo('landing');
+      }
+    }
+
+    // ------------------------------------------------------------------------
+    // ROUTING & VIEW NAVIGATION
+    // ------------------------------------------------------------------------
+    function navigateTo(viewId) {
+      const views = ['landing', 'register', 'login', 'forgot', 'onboarding', 'dashboard'];
+      views.forEach(v => {
+        const el = document.getElementById(`view-${v}`);
+        if (el) {
+          if (v === viewId) {
+            el.classList.remove('hidden');
+          } else {
+            el.classList.add('hidden');
+          }
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (viewId === 'onboarding') {
+        goToOnboardingStep(appState.currentStep || 1);
+      } else if (viewId === 'dashboard') {
+        renderDashboard();
+      }
+    }
+
+    function startGuestOnboarding() {
+      appState.userProfile.displayName = 'Guest Hero';
+      appState.userProfile.email = 'guest@chug.demo';
+      saveState();
+      syncFormWithState();
+      navigateTo('onboarding');
+      goToOnboardingStep(1);
+    }
+
+    function updateHeaderUserBadge() {
+      const badge = document.getElementById('userBadge');
+      const nameEl = document.getElementById('badgeName');
+      if (badge && nameEl) {
+        if (appState.userProfile && appState.userProfile.displayName) {
+          badge.classList.remove('hidden');
+          nameEl.textContent = appState.userProfile.displayName;
+        }
+      }
+    }
+
+    // ------------------------------------------------------------------------
+    // AUTHENTICATION LOGIC (Demo Simulated)
+    // ------------------------------------------------------------------------
+    function togglePasswordVisibility(inputId) {
+      const el = document.getElementById(inputId);
+      if (el) {
+        el.type = el.type === 'password' ? 'text' : 'password';
+      }
+    }
+
+    function handleRegisterSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const pass = document.getElementById('regPassword').value;
+      const confirm = document.getElementById('regPasswordConfirm').value;
+
+      let valid = true;
+
+      // Validation
+      if (!name) {
+        document.getElementById('regNameError').classList.remove('hidden');
+        valid = false;
+      } else {
+        document.getElementById('regNameError').classList.add('hidden');
+      }
+
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        document.getElementById('regEmailError').classList.remove('hidden');
+        valid = false;
+      } else {
+        document.getElementById('regEmailError').classList.add('hidden');
+      }
+
+      if (pass.length < 8) {
+        document.getElementById('regPasswordError').classList.remove('hidden');
+        valid = false;
+      } else {
+        document.getElementById('regPasswordError').classList.add('hidden');
+      }
+
+      if (pass !== confirm) {
+        document.getElementById('regConfirmError').classList.remove('hidden');
+        valid = false;
+      } else {
+        document.getElementById('regConfirmError').classList.add('hidden');
+      }
+
+      if (!valid) return;
+
+      const btn = document.getElementById('regSubmitBtn');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = `<span class="animate-spin inline-block mr-2">⚡</span> CREATING DEMO PROFILE...`;
+      btn.disabled = true;
+
+      setTimeout(() => {
+        // Save to demo state
+        appState.userProfile.displayName = name;
+        appState.userProfile.email = email;
+        appState.completed = false;
+        appState.currentStep = 1;
+        saveState();
+
+        // Reset inputs for security
+        document.getElementById('regPassword').value = '';
+        document.getElementById('regPasswordConfirm').value = '';
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+
+        syncFormWithState();
+        navigateTo('onboarding');
+      }, 650);
+    }
+
+    function handleLoginSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const btn = document.getElementById('loginSubmitBtn');
+      btn.innerHTML = `<span class="animate-spin inline-block mr-2">⚡</span> LOGGING IN...`;
+      btn.disabled = true;
+
+      setTimeout(() => {
+        btn.innerHTML = `<span>LOG IN</span>`;
+        btn.disabled = false;
+
+        if (email) {
+          appState.userProfile.email = email;
+          saveState();
+        }
+
+        // Navigate based on completion
+        if (appState.completed) {
+          navigateTo('dashboard');
+        } else {
+          navigateTo('onboarding');
+        }
+      }, 500);
+    }
+
+    function handleForgotSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('forgotEmail').value.trim();
+      document.getElementById('sentEmailPlaceholder').textContent = email || 'your email';
+      document.getElementById('forgotStateForm').classList.add('hidden');
+      document.getElementById('forgotSuccessState').classList.remove('hidden');
+    }
+
+    // ------------------------------------------------------------------------
+    // MULTI-STEP ONBOARDING CONTROLLER
+    // ------------------------------------------------------------------------
+    const stepTitles = [
+      "WHO'S THE THIRST BOSS?",
+      "WHEN DOES YOUR DAY START?",
+      "WHAT'S ON YOUR SCHEDULE?",
+      "LET'S SET YOUR FLOW!",
+      "YOUR CHUG! GAME PLAN"
+    ];
+
+    function goToOnboardingStep(stepNumber) {
+      if (stepNumber < 1 || stepNumber > 5) return;
+
+      // Save input from current step before switching
+      persistCurrentStepInputs();
+
+      appState.currentStep = stepNumber;
+      saveState();
+
+      // Toggle views
+      for (let i = 1; i <= 5; i++) {
+        const stepEl = document.getElementById(`step-${i}`);
+        if (stepEl) {
+          if (i === stepNumber) {
+            stepEl.classList.remove('hidden');
+          } else {
+            stepEl.classList.add('hidden');
+          }
+        }
+      }
+
+      // Update progress bar
+      const pct = (stepNumber / 5) * 100;
+      document.getElementById('progressBarFill').style.width = `${pct}%`;
+      document.getElementById('stepPercentage').textContent = `${Math.round(pct)}%`;
+      document.getElementById('stepIndicatorTitle').textContent = `STEP ${stepNumber} OF 5: ${stepTitles[stepNumber - 1]}`;
+
+      // Update footer buttons
+      const backBtn = document.getElementById('obBackBtn');
+      const nextBtn = document.getElementById('obNextBtn');
+      const nextBtnText = document.getElementById('nextBtnText');
+
+      if (stepNumber === 1) {
+        backBtn.innerHTML = `← WELCOME`;
+      } else {
+        backBtn.innerHTML = `← BACK`;
+      }
+
+      if (stepNumber === 5) {
+        nextBtnText.textContent = `LET'S CHUG!`;
+        nextBtn.classList.remove('bg-chugYellow');
+        nextBtn.classList.add('bg-emerald-400');
+        renderReviewSummary();
+      } else {
+        nextBtnText.textContent = `CONTINUE`;
+        nextBtn.classList.add('bg-chugYellow');
+        nextBtn.classList.remove('bg-emerald-400');
+      }
+
+      if (stepNumber === 2) renderTimeline();
+      if (stepNumber === 3) renderActivities();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function prevOnboardingStep() {
+      if (appState.currentStep === 1) {
+        navigateTo('landing');
+      } else {
+        goToOnboardingStep(appState.currentStep - 1);
+      }
+    }
+
+    function nextOnboardingStep() {
+      if (appState.currentStep === 5) {
+        completeOnboarding();
+      } else {
+        goToOnboardingStep(appState.currentStep + 1);
+      }
+    }
+
+    function completeOnboarding() {
+      persistCurrentStepInputs();
+      appState.completed = true;
+      saveState();
+
+      // Show brief success alert & open dashboard
+      const notice = document.getElementById('finishNotice');
+      if (notice) notice.classList.remove('hidden');
+      navigateTo('dashboard');
+    }
+
+    function persistCurrentStepInputs() {
+      // Step 1
+      const name = document.getElementById('obName');
+      if (name) appState.userProfile.displayName = name.value.trim() || 'Alex Rivera';
+      const age = document.getElementById('obAge');
+      if (age) appState.userProfile.age = parseInt(age.value) || 28;
+      const weight = document.getElementById('obWeight');
+      if (weight) appState.userProfile.weightKg = parseInt(weight.value) || 72;
+
+      // Step 2
+      const wake = document.getElementById('obWakeTime');
+      if (wake) appState.dailySchedule.wakeUpTime = wake.value;
+      const bed = document.getElementById('obBedTime');
+      if (bed) appState.dailySchedule.bedtime = bed.value;
+      const first = document.getElementById('obFirstAlert');
+      if (first) appState.dailySchedule.firstReminderTime = first.value;
+      const last = document.getElementById('obLastAlert');
+      if (last) appState.dailySchedule.lastReminderTime = last.value;
+
+      // Step 4
+      const goal = document.getElementById('obGoalMl');
+      if (goal) appState.hydrationPreferences.dailyGoalMl = parseInt(goal.value) || 2500;
+      const rem = document.getElementById('obRemindersEnabled');
+      if (rem) appState.hydrationPreferences.remindersEnabled = rem.checked;
+      const pause = document.getElementById('obPauseOnGoal');
+      if (pause) appState.hydrationPreferences.pauseWhenGoalReached = pause.checked;
+
+      saveState();
+    }
+
+    // Step 1 Selection Handlers
+    function selectUnit(unit) {
+      appState.userProfile.preferredUnit = unit;
+      document.querySelectorAll('.unit-btn').forEach(btn => {
+        btn.classList.remove('bg-chugBlue', 'text-white', 'shadow-pop');
+        btn.classList.add('bg-chugCream', 'text-chugInk');
+      });
+      const active = document.getElementById(`unit-${unit}`);
+      if (active) {
+        active.classList.add('bg-chugBlue', 'text-white', 'shadow-pop');
+        active.classList.remove('bg-chugCream', 'text-chugInk');
+      }
+      document.getElementById('goalUnitLabel').textContent = unit === 'ml' ? 'ML / DAY' : 'FL OZ / DAY';
+      saveState();
+    }
+
+    function selectActivityLevel(level) {
+      appState.userProfile.activityLevel = level;
+      document.querySelectorAll('.activity-card').forEach(card => {
+        card.classList.remove('bg-chugYellow', 'shadow-pop');
+        card.classList.add('bg-chugCream');
+      });
+      const active = document.getElementById(`act-${level}`);
+      if (active) {
+        active.classList.add('bg-chugYellow', 'shadow-pop');
+        active.classList.remove('bg-chugCream');
+      }
+      saveState();
+    }
+
+    // Step 2 Schedule Handlers
+    function setScheduleType(type) {
+      appState.dailySchedule.differentWeekendSchedule = (type === 'split');
+      const sameBtn = document.getElementById('sched-same');
+      const splitBtn = document.getElementById('sched-split');
+      if (type === 'same') {
+        sameBtn.classList.add('bg-chugYellow', 'shadow-pop-sm');
+        sameBtn.classList.remove('bg-white');
+        splitBtn.classList.remove('bg-chugYellow', 'shadow-pop-sm');
+        splitBtn.classList.add('bg-white');
+      } else {
+        splitBtn.classList.add('bg-chugYellow', 'shadow-pop-sm');
+        splitBtn.classList.remove('bg-white');
+        sameBtn.classList.remove('bg-chugYellow', 'shadow-pop-sm');
+        sameBtn.classList.add('bg-white');
+      }
+      saveState();
+    }
+
+    function renderTimeline() {
+      const wake = document.getElementById('obWakeTime').value || '07:00';
+      const bed = document.getElementById('obBedTime').value || '22:30';
+      const [wH, wM] = wake.split(':').map(Number);
+      const [bH, bM] = bed.split(':').map(Number);
+
+      let awakeMinutes = (bH * 60 + bM) - (wH * 60 + wM);
+      if (awakeMinutes < 0) awakeMinutes += 24 * 60; // Overnight schedule support
+
+      const awakeHours = (awakeMinutes / 60).toFixed(1);
+      document.getElementById('activeHoursSpan').textContent = `${awakeHours} WAKING HOURS`;
+
+      const bar = document.getElementById('timelineBar');
+      const wakePct = ((wH * 60 + wM) / (24 * 60)) * 100;
+      const awakePct = (awakeMinutes / (24 * 60)) * 100;
+      const sleepAfterPct = 100 - (wakePct + awakePct);
+
+      bar.innerHTML = `
+        <div style="width: ${Math.max(5, wakePct)}%" class="bg-chugBlue/70 h-full flex items-center justify-center text-[10px] font-bold border-r border-white/20">SLEEP</div>
+        <div style="width: ${awakePct}%" class="bg-chugCyan h-full flex items-center justify-center text-[10px] font-black text-chugInk border-r border-white/20">HYDRATION ACTIVE (${wake} - ${bed})</div>
+        <div style="width: ${Math.max(5, sleepAfterPct)}%" class="bg-chugBlue/70 h-full flex items-center justify-center text-[10px] font-bold">SLEEP</div>
+      `;
+    }
+
+    // Step 3 Activity Management
+    function renderActivities() {
+      const list = document.getElementById('activitiesList');
+      if (!list) return;
+
+      if (!appState.activities || appState.activities.length === 0) {
+        list.innerHTML = `
+          <div class="bg-chugCream comic-border p-6 rounded-xl text-center">
+            <p class="font-display text-xl uppercase text-chugInk/70">NO ACTIVITIES SCHEDULED YET</p>
+            <p class="text-xs font-comic font-bold text-chugInk/60 mt-1">Tap "+ ADD ACTIVITY" to insert training sessions, work blocks, or classes.</p>
+          </div>
+        `;
+        return;
+      }
+
+      list.innerHTML = appState.activities.map((act, index) => {
+        const typeEmoji = {
+          'Running': '🏃',
+          'Gym': '🏋️',
+          'Work': '💻',
+          'College': '🎓',
+          'Study': '📚',
+          'Sports': '⚽',
+          'Nap': '💤',
+          'Outdoor': '🌲',
+          'Custom': '⚡'
+        }[act.type] || '⚡';
+
+        return `
+          <div class="bg-white comic-border p-4 rounded-xl shadow-pop-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">${typeEmoji}</span>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h4 class="font-display text-lg uppercase text-chugInk">${act.customName || act.type}</h4>
+                  <span class="bg-chugYellow px-2 py-0.5 rounded text-[10px] font-black comic-border">${act.type}</span>
+                </div>
+                <p class="text-xs font-comic font-bold text-chugInk/70">
+                  ${act.startTime} – ${act.endTime} • Days: ${act.daysOfWeek.join(', ')}
+                </p>
+                <div class="flex gap-2 text-[10px] font-black text-chugBlue mt-0.5">
+                  ${act.pauseReminders ? '<span>⏸️ Reminders Paused</span>' : ''}
+                  ${act.resumeAfterActivity ? '<span>⚡ Immediate Hydration Primer</span>' : ''}
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 self-end sm:self-auto">
+              <button type="button" onclick="editActivity('${act.id}')" class="px-3 py-1.5 bg-chugCream hover:bg-yellow-100 text-chugInk comic-border rounded-lg font-comic font-black text-xs">
+                EDIT
+              </button>
+              <button type="button" onclick="deleteActivity('${act.id}')" class="px-3 py-1.5 bg-white hover:bg-rose-50 text-chugRed comic-border rounded-lg font-comic font-black text-xs">
+                DELETE
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openActivityModal(actId = null) {
+      const modal = document.getElementById('activityModal');
+      const form = document.getElementById('activityForm');
+      form.reset();
+      document.getElementById('actEditId').value = '';
+      document.getElementById('customNameRow').classList.add('hidden');
+
+      // Reset day buttons
+      document.querySelectorAll('.day-btn').forEach(btn => {
+        btn.classList.remove('bg-chugYellow', 'shadow-pop-sm');
+        btn.classList.add('bg-white');
+      });
+
+      if (actId) {
+        const act = appState.activities.find(a => a.id === actId);
+        if (act) {
+          document.getElementById('actModalTitle').textContent = 'EDIT ACTIVITY';
+          document.getElementById('actEditId').value = act.id;
+          document.getElementById('actTypeSelect').value = act.type;
+          if (act.type === 'Custom') {
+            document.getElementById('customNameRow').classList.remove('hidden');
+            document.getElementById('actCustomName').value = act.customName || '';
+          }
+          document.getElementById('actStartTime').value = act.startTime;
+          document.getElementById('actEndTime').value = act.endTime;
+          document.getElementById('actPauseReminders').checked = act.pauseReminders;
+          document.getElementById('actResumeAfter').checked = act.resumeAfterActivity;
+
+          // Days
+          document.querySelectorAll('.day-btn').forEach(btn => {
+            if (act.daysOfWeek.includes(btn.textContent)) {
+              btn.classList.add('bg-chugYellow', 'shadow-pop-sm');
+              btn.classList.remove('bg-white');
+            }
+          });
+        }
+      } else {
+        document.getElementById('actModalTitle').textContent = 'ADD ACTIVITY';
+        // default Mon-Fri selected
+        document.querySelectorAll('.day-btn').forEach((btn, idx) => {
+          if (idx < 5) {
+            btn.classList.add('bg-chugYellow', 'shadow-pop-sm');
+            btn.classList.remove('bg-white');
+          }
+        });
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeActivityModal() {
+      document.getElementById('activityModal').classList.add('hidden');
+    }
+
+    function handleActivityTypeChange() {
+      const val = document.getElementById('actTypeSelect').value;
+      const customRow = document.getElementById('customNameRow');
+      if (val === 'Custom') {
+        customRow.classList.remove('hidden');
+      } else {
+        customRow.classList.add('hidden');
+      }
+    }
+
+    function toggleDay(btn, day) {
+      if (btn.classList.contains('bg-chugYellow')) {
+        btn.classList.remove('bg-chugYellow', 'shadow-pop-sm');
+        btn.classList.add('bg-white');
+      } else {
+        btn.classList.add('bg-chugYellow', 'shadow-pop-sm');
+        btn.classList.remove('bg-white');
+      }
+    }
+
+    function handleSaveActivity(e) {
+      e.preventDefault();
+      const editId = document.getElementById('actEditId').value;
+      const type = document.getElementById('actTypeSelect').value;
+      const customName = document.getElementById('actCustomName').value.trim();
+      const start = document.getElementById('actStartTime').value;
+      const end = document.getElementById('actEndTime').value;
+      const pause = document.getElementById('actPauseReminders').checked;
+      const resume = document.getElementById('actResumeAfter').checked;
+
+      // Extract days
+      const days = [];
+      const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      document.querySelectorAll('.day-btn').forEach((btn, idx) => {
+        if (btn.classList.contains('bg-chugYellow')) {
+          days.push(dayNames[idx]);
+        }
+      });
+
+      if (days.length === 0) days.push('Mon', 'Wed', 'Fri');
+
+      if (editId) {
+        const index = appState.activities.findIndex(a => a.id === editId);
+        if (index > -1) {
+          appState.activities[index] = {
+            id: editId,
+            type,
+            customName: customName || type,
+            startTime: start,
+            endTime: end,
+            daysOfWeek: days,
+            pauseReminders: pause,
+            resumeAfterActivity: resume
+          };
+        }
+      } else {
+        appState.activities.push({
+          id: 'act-' + Date.now(),
+          type,
+          customName: customName || type,
+          startTime: start,
+          endTime: end,
+          daysOfWeek: days,
+          pauseReminders: pause,
+          resumeAfterActivity: resume
+        });
+      }
+
+      saveState();
+      renderActivities();
+      closeActivityModal();
+    }
+
+    function editActivity(actId) {
+      openActivityModal(actId);
+    }
+
+    function deleteActivity(actId) {
+      if (confirm('Remove this activity from your routine?')) {
+        appState.activities = appState.activities.filter(a => a.id !== actId);
+        saveState();
+        renderActivities();
+      }
+    }
+
+    // Step 4 Handlers
+    function adjustGoal(delta) {
+      const input = document.getElementById('obGoalMl');
+      let val = (parseInt(input.value) || 2500) + delta;
+      if (val < 500) val = 500;
+      if (val > 6000) val = 6000;
+      input.value = val;
+      appState.hydrationPreferences.dailyGoalMl = val;
+      saveState();
+    }
+
+    function selectInterval(minutes) {
+      appState.hydrationPreferences.reminderIntervalMinutes = minutes;
+      document.querySelectorAll('.interval-btn').forEach(b => {
+        b.classList.remove('bg-chugBlue', 'text-white', 'shadow-pop');
+        b.classList.add('bg-white', 'text-chugInk');
+      });
+      const active = document.getElementById(`int-${minutes}`);
+      if (active) {
+        active.classList.add('bg-chugBlue', 'text-white', 'shadow-pop');
+        active.classList.remove('bg-white', 'text-chugInk');
+      }
+      saveState();
+    }
+
+    function selectStyle(style) {
+      appState.hydrationPreferences.reminderStyle = style;
+      document.querySelectorAll('.style-card').forEach(c => {
+        c.classList.remove('bg-chugYellow', 'shadow-pop');
+        c.classList.add('bg-white');
+      });
+      const active = document.getElementById(`style-${style}`);
+      if (active) {
+        active.classList.add('bg-chugYellow', 'shadow-pop');
+        active.classList.remove('bg-white');
+      }
+      saveState();
+    }
+
+    // Step 5 Review Summary
+    function renderReviewSummary() {
+      const p = appState.userProfile;
+      const s = appState.dailySchedule;
+      const h = appState.hydrationPreferences;
+
+      document.getElementById('sumName').textContent = p.displayName || 'Alex Rivera';
+      document.getElementById('sumStats').textContent = `Age ${p.age || '—'} • ${p.weightKg ? p.weightKg + ' kg' : '—'} • ${p.activityLevel.replace('_', ' ').toUpperCase()}`;
+      document.getElementById('sumUnit').textContent = `Units: ${p.preferredUnit === 'ml' ? 'Millilitres (ml)' : 'Fluid Ounces (fl oz)'}`;
+
+      document.getElementById('sumGoal').textContent = `${h.dailyGoalMl.toLocaleString()} ${p.preferredUnit.toUpperCase()} / DAY`;
+      document.getElementById('sumInterval').textContent = `Every ${h.reminderIntervalMinutes} Minutes • ${h.reminderStyle.toUpperCase()} Vibe`;
+      document.getElementById('sumGoalPause').textContent = `Pause on victory: ${h.pauseWhenGoalReached ? 'YES' : 'NO'}`;
+
+      document.getElementById('sumRoutine').textContent = `${s.wakeUpTime} – ${s.bedtime}`;
+      document.getElementById('sumAlerts').textContent = `First Alert: ${s.firstReminderTime} • Last: ${s.lastReminderTime}`;
+
+      document.getElementById('sumActivitiesCount').textContent = `${appState.activities.length} SESSIONS ACTIVE`;
+      document.getElementById('sumActivitiesList').textContent = appState.activities.map(a => a.customName || a.type).join(', ') || 'No sessions added';
+
+      // Sample reminders pill timeline
+      const pillsContainer = document.getElementById('sampleTimelinePills');
+      pillsContainer.innerHTML = '';
+      
+      const [wH, wM] = s.wakeUpTime.split(':').map(Number);
+      const interval = h.reminderIntervalMinutes || 60;
+      let currentMinutes = (wH * 60 + wM) + 30; // first alert ~30m after wake
+
+      for (let i = 0; i < 6; i++) {
+        const hh = Math.floor(currentMinutes / 60) % 24;
+        const mm = currentMinutes % 60;
+        const timeStr = `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}`;
+        pillsContainer.innerHTML += `
+          <span class="bg-white comic-border px-2.5 py-1 rounded-md text-xs font-comic font-black text-chugInk shadow-pop-sm">
+            ⏰ ${timeStr} (${h.reminderStyle})
+          </span>
+        `;
+        currentMinutes += interval;
+      }
+    }
+
+    // ------------------------------------------------------------------------
+    // DASHBOARD PREVIEW & REAL-TIME LOGGING (Demo Integration)
+    // ------------------------------------------------------------------------
+    function renderDashboard() {
+      const p = appState.userProfile;
+      const h = appState.hydrationPreferences;
+      const s = appState.dailySchedule;
+
+      document.getElementById('dashHeroName').textContent = p.displayName.toUpperCase();
+      document.getElementById('dashHeroGoal').textContent = `Target: ${h.dailyGoalMl.toLocaleString()} ${p.preferredUnit.toUpperCase()}`;
+      document.getElementById('dashIntake').innerHTML = `${appState.todayIntakeMl} <span class="text-xl">${p.preferredUnit.toUpperCase()}</span>`;
+
+      const pct = Math.min(100, Math.round((appState.todayIntakeMl / h.dailyGoalMl) * 100));
+      document.getElementById('dashProgressBar').style.width = `${pct}%`;
+
+      document.getElementById('dashNextAlertTime').textContent = `3:45 PM • Interval: ${h.reminderIntervalMinutes} Mins`;
+      document.getElementById('dashBedtimeSpan').textContent = s.bedtime;
+
+      const actPreview = document.getElementById('dashActivitiesPreview');
+      if (appState.activities.length > 0) {
+        actPreview.innerHTML = appState.activities.map(a => `
+          <div class="flex items-center justify-between py-1 border-b border-chugInk/10">
+            <span>⚡ ${a.customName || a.type}</span>
+            <span class="text-chugBlue">${a.startTime} – ${a.endTime}</span>
+          </div>
+        `).join('');
+      } else {
+        actPreview.innerHTML = `<p class="text-chugInk/60">No activity sessions configured.</p>`;
+      }
+    }
+
+    function logWater(amount) {
+      appState.todayIntakeMl = (appState.todayIntakeMl || 0) + amount;
+      saveState();
+      renderDashboard();
+    }
+
+    // ------------------------------------------------------------------------
+    // INITIALIZATION & STATE REHYDRATION
+    // ------------------------------------------------------------------------
+    function syncFormWithState() {
+      updateHeaderUserBadge();
+
+      // Step 1
+      if (document.getElementById('obName')) document.getElementById('obName').value = appState.userProfile.displayName || '';
+      if (document.getElementById('obAge')) document.getElementById('obAge').value = appState.userProfile.age || '';
+      if (document.getElementById('obWeight')) document.getElementById('obWeight').value = appState.userProfile.weightKg || '';
+      selectUnit(appState.userProfile.preferredUnit || 'ml');
+      selectActivityLevel(appState.userProfile.activityLevel || 'moderately_active');
+
+      // Step 2
+      if (document.getElementById('obWakeTime')) document.getElementById('obWakeTime').value = appState.dailySchedule.wakeUpTime || '07:00';
+      if (document.getElementById('obBedTime')) document.getElementById('obBedTime').value = appState.dailySchedule.bedtime || '22:30';
+      if (document.getElementById('obFirstAlert')) document.getElementById('obFirstAlert').value = appState.dailySchedule.firstReminderTime || '07:30';
+      if (document.getElementById('obLastAlert')) document.getElementById('obLastAlert').value = appState.dailySchedule.lastReminderTime || '21:45';
+      setScheduleType(appState.dailySchedule.differentWeekendSchedule ? 'split' : 'same');
+
+      // Step 4
+      if (document.getElementById('obGoalMl')) document.getElementById('obGoalMl').value = appState.hydrationPreferences.dailyGoalMl || 2500;
+      selectInterval(appState.hydrationPreferences.reminderIntervalMinutes || 60);
+      selectStyle(appState.hydrationPreferences.reminderStyle || 'balanced');
+      if (document.getElementById('obRemindersEnabled')) document.getElementById('obRemindersEnabled').checked = appState.hydrationPreferences.remindersEnabled;
+      if (document.getElementById('obPauseOnGoal')) document.getElementById('obPauseOnGoal').checked = appState.hydrationPreferences.pauseWhenGoalReached;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      syncFormWithState();
+      updateHeaderUserBadge();
+      // Start at landing page
+      navigateTo('landing');
+    });
+  </script>
+</body></html>
